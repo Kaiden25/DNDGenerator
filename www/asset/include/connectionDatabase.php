@@ -36,8 +36,11 @@ if ($mysqli->connect_error) {
     die('Connect Error (' . $mysqli->connect_errno . ') '
         . $mysqli->connect_error);
 }
+//$query = file_get_contents("../../../resources/Database/dndgenerator.sql");
+//$stmt = $db->prepare($query);
+
 $sql = "SET NAMES utf8;";
-$sql = mysqli_query($mysqli, $sql);
+$res = $mysqli->query($sql);
 //echo 'Success... ' . $mysqli->host_info . "\n";
 //$mysqli->close();
 
@@ -58,13 +61,13 @@ function getEquipmentType(){
     GLOBAL $mysqli;
     $equipmentTypes = array();
     $sql = "SELECT `weaponName` FROM `weapons`;";
-    $sql = mysqli_query($mysqli, $sql);
+    $res = $mysqli->query($sql);
     $sql2 = "SELECT `armorName` FROM `armor`;";
-    $sql2 = mysqli_query($mysqli, $sql2);
-    while ($row = $sql->fetch_assoc()){
+    $res2 = $mysqli->query($sql2);
+    while ($row = $res->fetch_assoc()){
         array_push($equipmentTypes, $row);
     }
-    while ($row = $sql2->fetch_assoc()){
+    while ($row = $res2->fetch_assoc()){
         array_push($equipmentTypes, $row);
     }
     return $equipmentTypes;
@@ -74,8 +77,8 @@ function getWeaponType(){
     GLOBAL $mysqli;
     $weaponTypes = array();
     $sql = "SELECT `weaponName` FROM `weapons`;";
-    $sql = mysqli_query($mysqli, $sql);
-    while ($row = $sql->fetch_assoc()){
+    $res = $mysqli->query($sql);
+    while ($row = $res->fetch_assoc()){
         array_push($weaponTypes, $row);
     }
     return $weaponTypes;
@@ -85,8 +88,8 @@ function getArmorType(){
     GLOBAL $mysqli;
     $armorTypes = array();
     $sql = "SELECT `armorName` FROM `armor`;";
-    $sql = mysqli_query($mysqli, $sql);
-    while ($row = $sql->fetch_assoc()){
+    $res = $mysqli->query($sql);
+    while ($row = $res->fetch_assoc()){
         array_push($armorTypes, $row);
     }
     return $armorTypes;
@@ -97,8 +100,7 @@ function getWeapon($weapon){
     $weaponinfo = array();
     if ($weapon !== "Random"){
         $sql = "SELECT * FROM `weapons` WHERE `weaponName` LIKE '".$weapon."';";
-        $sql = mysqli_query($mysqli, $sql);
-        $result = $sql;
+                $result = $mysqli->query($sql);
         while ($row = $result->fetch_assoc()){
             array_push($weaponinfo, $row);
         }
@@ -110,8 +112,7 @@ function getWeapon($weapon){
         $weaponId = mt_rand(1, $weaponMaxId);
 
         $sql2 = "SELECT * FROM `weapons` WHERE `id` LIKE ".$weaponId.";";
-        $sql2 = mysqli_query($mysqli, $sql2);
-        $result = $sql2;
+        $result = $mysqli->query($sql2);
         while ($row = $result->fetch_assoc()){
             array_push($weaponinfo, $row);
         }
@@ -131,14 +132,13 @@ function getArmor($armor){
         }
     } else {
         $sql = "SELECT * FROM `armor`;";
-        $sql = mysqli_query($mysqli, $sql);
-        $result = $sql;
+        $result = $mysqli->query($sql);
         $armorMaxId = $result->num_rows;
         $armorId = mt_rand(1, $armorMaxId);
 
         $sql2 = "SELECT * FROM `armor` WHERE `id` LIKE ".$armorId.";";
-        $sql2 = mysqli_query($mysqli, $sql2);
-        while ($row = $sql2->fetch_assoc()){
+        $res2 = $mysqli->query($sql2);
+        while ($row = $res2->fetch_assoc()){
             array_push($armorinfo, $row);
         }
     }
@@ -172,14 +172,12 @@ function getCreator(){
     GLOBAL $mysqli;
     $creatorinfo = array();
     $sql = "SELECT * FROM `creator`;";
-    $sql = mysqli_query($mysqli, $sql);
-    $result = $sql;
+    $result = $mysqli->query($sql);
     $creatorMaxId = $result->num_rows;
     $creatorId = mt_rand(1, $creatorMaxId);
 
     $sql2 = "SELECT `creatorType`, `text` FROM `creator` WHERE `id` LIKE ".$creatorId.";";
-    $sql2 = mysqli_query($mysqli, $sql2);
-    $result = $sql2;
+    $result = $mysqli->query($sql2);
     while ($row = $result->fetch_assoc()){
         array_push($creatorinfo, $row);
     }
@@ -190,14 +188,13 @@ function getMinorProperty(){
     GLOBAL $mysqli;
     $minorpropertyinfo = array();
     $sql = "SELECT * FROM `minorproperties`;";
-    $sql = mysqli_query($mysqli, $sql);
-    $result = $sql;
+    $result = $mysqli->query($sql);
     $minorpropertyMaxId = $result->num_rows;
     $minorpropertyId = mt_rand(1, $minorpropertyMaxId);
 
     $sql2 = "SELECT `title`, `text` FROM `minorproperties` WHERE `id` LIKE ".$minorpropertyId.";";
-    $sql2 = mysqli_query($mysqli, $sql2);
-    $result = $sql2;
+    $mysqli->query($sql2);
+    $result = $mysqli->query($sql2);
     while ($row = $result->fetch_assoc()){
         array_push($minorpropertyinfo, $row);
     }
@@ -208,14 +205,12 @@ function getHistory(){
     GLOBAL $mysqli;
     $historyinfo = array();
     $sql = "SELECT * FROM `history`;";
-    $sql = mysqli_query($mysqli, $sql);
-    $result = $sql;
+    $result = $mysqli->query($sql);
     $historyMaxId = $result->num_rows;
     $historyId = mt_rand(1, $historyMaxId);
 
     $sql2 = "SELECT `theme`, `text` FROM `history` WHERE `id` LIKE ".$historyId.";";
-    $sql2 = mysqli_query($mysqli, $sql2);
-    $result = $sql2;
+    $result = $mysqli->query($sql2);
     while ($row = $result->fetch_assoc()){
         array_push($historyinfo, $row);
     }
@@ -226,14 +221,12 @@ function getQuirk(){
     GLOBAL $mysqli;
     $quirkinfo = array();
     $sql = "SELECT * FROM `quirks`;";
-    $sql = mysqli_query($mysqli, $sql);
-    $result = $sql;
+    $result = $mysqli->query($sql);
     $quirkMaxId = $result->num_rows;
     $quirkId = mt_rand(1, $quirkMaxId);
 
     $sql2 = "SELECT `theme`, `text` FROM `quirks` WHERE `id` LIKE ".$quirkId.";";
-    $sql2 = mysqli_query($mysqli, $sql2);
-    $result = $sql2;
+    $result = $mysqli->query($sql2);
     while ($row = $result->fetch_assoc()){
         array_push($quirkinfo, $row);
     }
@@ -244,14 +237,12 @@ function getRarity(){
     GLOBAL $mysqli;
     $rarityinfo = array();
     $sql = "SELECT * FROM `rarity`;";
-    $sql = mysqli_query($mysqli, $sql);
-    $result = $sql;
+    $result = $mysqli->query($sql);
     $rarityMaxId = $result->num_rows;
     $rarityId = mt_rand(1, $rarityMaxId);
 
     $sql2 = "SELECT `rarity`, `maxSpellLevel`, `maxBonus` FROM `rarity` WHERE `id` LIKE ".$rarityId.";";
-    $sql2 = mysqli_query($mysqli, $sql2);
-    $result = $sql2;
+    $result = $mysqli->query($sql2);
     while ($row = $result->fetch_assoc()){
         array_push($rarityinfo, $row);
     }

@@ -48,29 +48,39 @@ include "asset/include/generator.php";
                 <?php
                 if($_POST['itemType'] === 'Weapon') { ?>
                 What weapon type do you want to create?
-                    <input list="weaponType" name="weaponType" required>
-                    <datalist id="weaponType">
+                <input list="weaponType" name="weaponType" required>
+                <datalist id="weaponType">
                 <?php weaponTypeDropDown(); ?>
                     </datalist>
                 <?php
                 } elseif ($_POST['itemType'] === 'Armor'){ ?>
                 What armor type do you want to create?
-                    <input list="armorType" name="armorType" required>
-                    <datalist id="armorType">';
-                    <?php armorTypeDropDown(); ?>
-                    </datalist>
+                <input list="armorType" name="armorType" required>
+                <datalist id="armorType">';
+                <?php armorTypeDropDown(); ?>
+                </datalist>
                 <?php
                 } elseif ($_POST['itemType'] === 'Random'){ ?>
-                    What equipment type do you want to create?
-                            <input list="equipmentType" name="equipmentType" required>
-                            <datalist id="equipmentType">';
-                    <?php equipmentTypeDropDown(); ?>
-                    </datalist>
+                What equipment type do you want to create?
+                <input list="equipmentType" name="equipmentType" required>
+                <datalist id="equipmentType">';
+                <?php equipmentTypeDropDown(); ?>
+                </datalist>
                 <?php
-                } ?>
+                }
+                if (isset($_POST['sentient'])){
+                    $_SESSION['sentient'] = $_POST['sentient'];
+                }
+                if (isset($_POST['artefact'])){
+                    $_SESSION['artefact'] = $_POST['artefact'];
+                }
+                if (isset($_POST['foe']) && $_POST['itemType'] !== 'Armor'){
+                    $_SESSION['foe'] = $_POST['foe'];
+                }
+                ?>
                 <br>
-                        <input type="submit" name="MagicItem" value="Generate the Magic Item">
-                        <input type="reset" value="Reset"></form>
+                <input type="submit" name="MagicItem" value="Generate the Magic Item">
+                <input type="reset" value="Reset"></form>
             <?php
             } ?>
         </td>

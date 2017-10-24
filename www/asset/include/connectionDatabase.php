@@ -27,7 +27,7 @@ if (getenv('MYSQL_PASSWORD')){
 if (getenv('MYSQL_DATABASE')){
     $db_name = getenv('MYSQL_DATABASE');
 } else {
-    $db_name = 'dndgenerator';
+    $db_name = 'DNDGenerator';
 }
 
 $mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
@@ -46,8 +46,9 @@ function getItemTypes(){
     GLOBAL $mysqli;
     $itemTypes = array();
     $sql = "SELECT * FROM `itemcategory` LIMIT 2;";
-    $sql = mysqli_query($mysqli, $sql);
-    while ($row = $sql->fetch_assoc()){
+    //$sql = mysqli_query($mysqli, $sql);
+    $result = $mysqli->query($sql);
+    while ($row = $result->fetch_assoc()){
         array_push($itemTypes, $row);
     }
     return $itemTypes;

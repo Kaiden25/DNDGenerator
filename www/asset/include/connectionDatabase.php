@@ -27,7 +27,7 @@ if (getenv('MYSQL_PASSWORD')){
 if (getenv('MYSQL_DATABASE')){
     $db_name = getenv('MYSQL_DATABASE');
 } else {
-    $db_name = 'DNDGenerator';
+    $db_name = 'dnd-generator_db';
 }
 
 $mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);

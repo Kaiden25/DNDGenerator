@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS `DNDGenerator` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+CREATE DATABASE IF NOT EXISTS `dnd-generator_db` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 -- phpMyAdmin SQL Dump
 -- version 4.7.4
 -- https://www.phpmyadmin.net/

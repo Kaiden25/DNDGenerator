@@ -1,11 +1,23 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Drake
  * Date: 19.10.2017
  * Time: 19:09
  */
+
 session_start();
+//$i = 0;
+//if (isset($_COOKIE['i'])) {
+//    $i++;
+//}
+//
+//if ((isset($_SESSION['sentient']) || isset($_SESSION['artefact']) || isset($_SESSION['foe'])) && $i <= 0){
+//    session_unset();
+//    $i++;
+//    $_COOKIE['i'] = $i;
+//}
 include "asset/include/connectionDatabase.php";
 include "asset/include/generator.php";
 
@@ -17,55 +29,51 @@ include "asset/include/generator.php";
 <body>
 <h1>D&D Generator</h1>
 <h2>Magic Item Generator</h2>
-<p>Fill out the forms to predefine a magic item</p>
+<p>Fill out the forms to generate a magic item</p>
 <table align="top">
     <tr>
-        <td style="width: 50%">
-            <form action="index.php" method="POST">
-                What item type do you want to create?
-                <input list="itemType" name="itemType" required>
-                <datalist id="itemType">
-                    <?php
-                        itemTypeDropDown();
-                    ?>
-                </datalist>
-                <br>
-                <input type="checkbox" name="sentient" value="sentient"> Is the item sentient?<br>
-                <br>
-                <input type="checkbox" name="artefact" value="artefact"> Is the item an artefact?<br>
-                <br>
-                <input type="checkbox" name="foe" value="foe"> Does the item have a foe<br>
-                <br>
-                <input type="submit" name="itemPredefine" value="Predefine the Magic Item">
-                <input type="reset" value="Reset">
-            </form>
-        </td>
         <td style="vertical-align:top">
-            <?php
+            <?php if (!isset($_POST['itemPredefine'])) { ?>
+                <form action="index.php" method="POST" id="itemCategoryForm">
+                    What item type do you want to create?
+                    <select name="itemType" form="itemCategoryForm" required>
+                        <?php
+                        itemTypeDropDown();
+                        ?>
+                    </select>
+                    <br>
+                    <input type="checkbox" name="sentient" value="sentient"> Is the item sentient?<br>
+                    <br>
+                    <input type="checkbox" name="artefact" value="artefact"> Is the item an artefact?<br>
+                    <br>
+                    <input type="checkbox" name="foe" value="foe"> Does the item have a foe<br>
+                    <br>
+                    <input type="submit" name="itemPredefine" value="Next">
+                    <input type="reset" value="Reset">
+                </form>
+                <?php
+            }
             if (isset($_POST['itemPredefine'])) {
                 $_SESSION['itemType'] = $_POST['itemType']; ?>
-                <form action="index.php" method="POST">
+                <form action="index.php" method="POST" id="itemTypeForm">
                 <?php
                 if($_POST['itemType'] === 'Weapon') { ?>
                 What weapon type do you want to create?
-                <input list="weaponType" name="weaponType" required>
-                <datalist id="weaponType">
+                <select name="weaponType" form="itemTypeForm" required>
                 <?php weaponTypeDropDown(); ?>
-                    </datalist>
+                </select>
                 <?php
                 } elseif ($_POST['itemType'] === 'Armor'){ ?>
                 What armor type do you want to create?
-                <input list="armorType" name="armorType" required>
-                <datalist id="armorType">';
+                <select name="armorType" form="itemTypeForm" required>
                 <?php armorTypeDropDown(); ?>
-                </datalist>
+                </select>
                 <?php
                 } elseif ($_POST['itemType'] === 'Random'){ ?>
                 What equipment type do you want to create?
-                <input list="equipmentType" name="equipmentType" required>
-                <datalist id="equipmentType">';
+                <select name="equipmentType" form="itemTypeForm" required>
                 <?php equipmentTypeDropDown(); ?>
-                </datalist>
+                </select>
                 <?php
                 }
                 if (isset($_POST['sentient'])){
@@ -74,7 +82,7 @@ include "asset/include/generator.php";
                 if (isset($_POST['artefact'])){
                     $_SESSION['artefact'] = $_POST['artefact'];
                 }
-                if (isset($_POST['foe']) && $_POST['itemType'] !== 'Armor'){
+                if (isset($_POST['foe']) && $_POST['itemType'] !== "Armor"){
                     $_SESSION['foe'] = $_POST['foe'];
                 }
                 ?>

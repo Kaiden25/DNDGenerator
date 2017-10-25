@@ -49,7 +49,6 @@ function getItemTypes(){
     GLOBAL $mysqli;
     $itemTypes = array();
     $sql = "SELECT * FROM `itemcategory` LIMIT 2;";
-    //$sql = mysqli_query($mysqli, $sql);
     $result = $mysqli->query($sql);
     while ($row = $result->fetch_assoc()){
         array_push($itemTypes, $row);

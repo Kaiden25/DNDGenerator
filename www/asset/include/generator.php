@@ -9,41 +9,39 @@
 function itemTypeDropDown()
 {
     foreach (getItemTypes() as $itemType) {
-        echo "<option value=".$itemType['text'].">";
+        echo '<option value="'.$itemType['text'].'">'.$itemType['text'].'</option>';
     }
-    echo '<option value="Random">';
+    echo '<option value="Random">Random</option>';
 }
-
 function weaponTypeDropDown()
 {
     foreach (getWeaponType() as $weapon) {
-        echo '<option value="'.$weapon['weaponName'].'">';
+        echo '<option value="'.$weapon['weaponName'].'">'.$weapon['weaponName'].'</option>';
     }
-    echo '<option value="Random">';
+    echo '<option value="Random">Random</option>';
 }
-
 function armorTypeDropDown()
 {
     foreach (getArmorType() as $armor) {
-        echo '<option value="'.$armor['armorName'].'">';
+        echo '<option value="'.$armor['armorName'].'">'.$armor['armorName'].'</option>';
     }
-    echo '<option value="Random">';
+    echo '<option value="Random">Random</option>';
 }
 function equipmentTypeDropDown()
 {
     foreach (getWeaponType() as $weapon) {
-        echo '<option value="'.$weapon['weaponName'].'">';
+        echo '<option value="'.$weapon['weaponName'].'">'.$weapon['weaponName'].'</option>';
     }
     foreach (getArmorType() as $armor) {
-        echo '<option value="'.$armor['armorName'].'">';
+        echo '<option value="'.$armor['armorName'].'">'.$armor['armorName'].'</option>';
     }
     echo '<option value="Random">';
 }
-
 function generateMagicItem(){
     $info = "";
     $attunement = "";
     $aligned = false;
+    $postinfo = "";
     foreach (getRarity() as $rarity){
         if ($rarity['rarity'] === "Legendary"){
             $attunement = "Requires Attunemt <br>";
@@ -72,7 +70,7 @@ function generateMagicItem(){
             $postinfo .= $purpose['text']."<br>";
         }
         foreach (getAlignemnt($aligned) as $alignment){
-            $postinfo .= $alignment['alignment']."<br>";
+            $postinfo .= $alignment['alignment']."<br><br>";
         }
     }
     foreach (getCreator() as $creator){
@@ -114,7 +112,7 @@ function generateMagicItem(){
             $foe = $foe['foeType'];
             $mod =$mod+1;
             $postinfo .= "<br>" . $foe . "<br>";
-            $postinfo .= "This weapon deals additional ". $mod  ."d6 against creatures of the ".$foe. "type. <br>";
+            $postinfo .= "This weapon deals additional ". $mod  ."d6 against creatures of the ".$foe. " type.<br>";
         }
     }
     if (isset($_POST['weaponType'])){
@@ -220,5 +218,14 @@ function generateMagicItem(){
         }
     }
     $info .= $postinfo;
+    if (isset($_SESSION['sentient'])){
+        unset($_SESSION['sentient']);
+    }
+    if (isset($_SESSION['artefact'])){
+        unset($_SESSION['artefact']);
+    }
+    if (isset($_SESSION['foe'])){
+        unset($_SESSION['foe']);
+    }
     return $info;
 }

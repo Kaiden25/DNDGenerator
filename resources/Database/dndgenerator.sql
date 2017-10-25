@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS `dnd-generator_db` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-CREATE USER IF NOT EXISTS 'dndgen'@'%' IDENTIFIED BY 'pFHKCn2kv2GnRqBdJ9TG5zsZ6';
-GRANT ALL ON `dnd-generator_db`.* TO 'dndgen'@'%' IDENTIFIED BY 'pFHKCn2kv2GnRqBdJ9TG5zsZ6' WITH GRANT OPTION;
+CREATE USER IF NOT EXISTS 'dndgen'@'%' IDENTIFIED BY '';
+GRANT ALL ON `dnd-generator_db`.* TO 'dndgen'@'%' IDENTIFIED BY '' WITH GRANT OPTION;
 -- phpMyAdmin SQL Dump
 -- version 4.7.4
 -- https://www.phpmyadmin.net/

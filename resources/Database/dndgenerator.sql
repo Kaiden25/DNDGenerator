@@ -1,3 +1,4 @@
+CREATE DATABASE IF NOT EXISTS `DNDGenerator` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 -- phpMyAdmin SQL Dump
 -- version 4.7.4
 -- https://www.phpmyadmin.net/
@@ -28,16 +29,17 @@ SET time_zone = "+00:00";
 -- Table structure for table `alignment`
 --
 
-CREATE TABLE `alignment` (
+CREATE TABLE IF NOT EXISTS`alignment` (
   `id` int(11) NOT NULL,
-  `alignment` varchar(30) DEFAULT NULL
+  `alignment` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `alignment`
 --
 
-INSERT INTO `alignment` (`id`, `alignment`) VALUES
+INSERT IGNORE INTO `alignment` (`id`, `alignment`) VALUES
 (1, 'Lawful Good'),
 (2, 'Neutral Good'),
 (3, 'Chaotic Good'),
@@ -54,7 +56,7 @@ INSERT INTO `alignment` (`id`, `alignment`) VALUES
 -- Table structure for table `armor`
 --
 
-CREATE TABLE `armor` (
+CREATE TABLE IF NOT EXISTS`armor` (
   `id` int(11) NOT NULL,
   `armorName` varchar(255) DEFAULT NULL,
   `armorclass` int(11) DEFAULT NULL,
@@ -65,14 +67,15 @@ CREATE TABLE `armor` (
   `category` varchar(6) NOT NULL,
   `weight` float NOT NULL,
   `price` float NOT NULL,
-  `source` varchar(12) NOT NULL
+  `source` varchar(12) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `armor`
 --
 
-INSERT INTO `armor` (`id`, `armorName`, `armorclass`, `hasDexMod`, `maxDexMod`, `strengthRequirment`, `stealthDisadvantage`, `category`, `weight`, `price`, `source`) VALUES
+INSERT IGNORE INTO `armor` (`id`, `armorName`, `armorclass`, `hasDexMod`, `maxDexMod`, `strengthRequirment`, `stealthDisadvantage`, `category`, `weight`, `price`, `source`) VALUES
 (1, 'Padded Armor', 11, 1, NULL, NULL, 1, 'light', 8, 5, 'PHB'),
 (2, 'Leather Armor', 11, 1, NULL, NULL, 0, 'light', 10, 10, 'PHB'),
 (3, 'Studded Leather Armor', 12, 1, NULL, NULL, 0, 'light', 13, 45, 'PHB'),
@@ -103,16 +106,17 @@ INSERT INTO `armor` (`id`, `armorName`, `armorclass`, `hasDexMod`, `maxDexMod`, 
 -- Table structure for table `comunication`
 --
 
-CREATE TABLE `comunication` (
+CREATE TABLE IF NOT EXISTS`comunication` (
   `id` int(11) NOT NULL,
-  `text` text
+  `text` text,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `comunication`
 --
 
-INSERT INTO `comunication` (`id`, `text`) VALUES
+INSERT IGNORE INTO `comunication` (`id`, `text`) VALUES
 (1, 'The item communicates by transmitting emotion to the creature carrying or wielding it. '),
 (2, 'The item can speak,  read, and understand one or more languages. '),
 (3, 'The item can speak,  read, and understand one or more languages.  In  addition, the item can communicate telepathically with  any character that carries or wields  it. ');
@@ -123,17 +127,18 @@ INSERT INTO `comunication` (`id`, `text`) VALUES
 -- Table structure for table `creator`
 --
 
-CREATE TABLE `creator` (
+CREATE TABLE IF NOT EXISTS`creator` (
   `id` int(11) NOT NULL,
   `creatorType` varchar(30) DEFAULT NULL,
-  `text` text
+  `text` text,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `creator`
 --
 
-INSERT INTO `creator` (`id`, `creatorType`, `text`) VALUES
+INSERT IGNORE INTO `creator` (`id`, `creatorType`, `text`) VALUES
 (1, 'Aberration', 'The item was created by aberrations in ancient times, possibly for the use of favored humanoid thralls. When seen from  the corner of the eye,  the item seems to be moving. '),
 (2, 'Human', 'The item was created during the heyday of a fallen human kingdom, or it  is tied to a human of legend. It might hold writing in a forgotten tongue or symbols whose significance is lost to the ages.'),
 (3, 'Celestial', 'The weapon is half the normal weight and inscribed with feathered wings, suns, and other symbols of good. Fiends find the items presence repulsive. '),
@@ -165,16 +170,17 @@ INSERT INTO `creator` (`id`, `creatorType`, `text`) VALUES
 -- Table structure for table `creaturetype`
 --
 
-CREATE TABLE `creaturetype` (
+CREATE TABLE IF NOT EXISTS`creaturetype` (
   `id` int(11) NOT NULL,
-  `creaturetype` varchar(30) NOT NULL
+  `creaturetype` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `creaturetype`
 --
 
-INSERT INTO `creaturetype` (`id`, `creaturetype`) VALUES
+INSERT IGNORE INTO `creaturetype` (`id`, `creaturetype`) VALUES
 (1, 'Aberration'),
 (2, 'Beast'),
 (3, 'Celestial'),
@@ -201,10 +207,11 @@ INSERT INTO `creaturetype` (`id`, `creaturetype`) VALUES
 -- Table structure for table `effect`
 --
 
-CREATE TABLE `effect` (
+CREATE TABLE IF NOT EXISTS`effect` (
   `id` int(11) NOT NULL,
   `effectType` varchar(30) DEFAULT NULL,
-  `text` text
+  `text` text,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -213,16 +220,17 @@ CREATE TABLE `effect` (
 -- Table structure for table `foe`
 --
 
-CREATE TABLE `foe` (
+CREATE TABLE IF NOT EXISTS`foe` (
   `id` int(11) NOT NULL,
-  `foeType` varchar(30) DEFAULT NULL
+  `foeType` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `foe`
 --
 
-INSERT INTO `foe` (`id`, `foeType`) VALUES
+INSERT IGNORE INTO `foe` (`id`, `foeType`) VALUES
 (1, 'Aberration'),
 (2, 'Beast'),
 (3, 'Celestial'),
@@ -262,17 +270,18 @@ INSERT INTO `foe` (`id`, `foeType`) VALUES
 -- Table structure for table `history`
 --
 
-CREATE TABLE `history` (
+CREATE TABLE IF NOT EXISTS`history` (
   `id` int(11) NOT NULL,
   `theme` varchar(30) DEFAULT NULL,
-  `text` text
+  `text` text,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `history`
 --
 
-INSERT INTO `history` (`id`, `theme`, `text`) VALUES
+INSERT IGNORE INTO `history` (`id`, `theme`, `text`) VALUES
 (1, 'Arcane', ' This item was created for (or by) an ancient order of spellcasters and bears the order’s symbol.'),
 (2, 'Bane', 'This item was created by the foes of a particular culture or kind of creature. If the culture or cultures are still around, they might recognize the item and single out the bearer as an enemy.'),
 (3, 'Exotic', 'This item is from a distant foreign land, such as Kara-Tur in the Forgotten Realms. While the item functions normally, it has an exotic design and Wuxia name (see Dungeon Master’s Guide, p. 41)'),
@@ -291,16 +300,17 @@ INSERT INTO `history` (`id`, `theme`, `text`) VALUES
 -- Table structure for table `itemcategory`
 --
 
-CREATE TABLE `itemcategory` (
+CREATE TABLE IF NOT EXISTS`itemcategory` (
   `id` int(11) NOT NULL,
-  `text` text
+  `text` text,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `itemcategory`
 --
 
-INSERT INTO `itemcategory` (`id`, `text`) VALUES
+INSERT IGNORE INTO `itemcategory` (`id`, `text`) VALUES
 (1, 'Weapon'),
 (2, 'Armor'),
 (3, 'Adventuring Gear'),
@@ -317,17 +327,19 @@ INSERT INTO `itemcategory` (`id`, `text`) VALUES
 -- Table structure for table `itemtype`
 --
 
-CREATE TABLE `itemtype` (
+CREATE TABLE IF NOT EXISTS`itemtype` (
   `id` int(11) NOT NULL,
   `itemType` varchar(30) DEFAULT NULL,
-  `FK_itemcategory` int(11) NOT NULL
+  `FK_itemcategory` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FK_itemcategory` FOREIGN KEY (`FK_itemcategory`) REFERENCES `itemcategory` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `itemtype`
+-- Dumping data for table `itemtype`CONSTRAINT `FK_itemcategory` FOREIGN KEY (`FK_itemcategory`) REFERENCES `itemcategory` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 --
 
-INSERT INTO `itemtype` (`id`, `itemType`, `FK_itemcategory`) VALUES
+INSERT IGNORE INTO `itemtype` (`id`, `itemType`, `FK_itemcategory`) VALUES
 (1, 'Light', 2),
 (2, 'Medium', 2),
 (3, 'Heavy', 2),
@@ -355,16 +367,17 @@ INSERT INTO `itemtype` (`id`, `itemType`, `FK_itemcategory`) VALUES
 -- Table structure for table `majornegativproperties`
 --
 
-CREATE TABLE `majornegativproperties` (
+CREATE TABLE IF NOT EXISTS`majornegativproperties` (
   `id` int(11) NOT NULL,
-  `text` text
+  `text` text,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `majornegativproperties`
 --
 
-INSERT INTO `majornegativproperties` (`id`, `text`) VALUES
+INSERT IGNORE INTO `majornegativproperties` (`id`, `text`) VALUES
 (1, 'While you are attuned to the artifact, your body rots over the course of four days, after which the rotting stops. You lose your hair by the end of day 1, finger tips and toe tips by the end of day 2, lips and nose by the end of day 3, and ears by the end of day 4. A regenerate spell restores lost body parts '),
 (2, 'While you are attuned to the artifact, you determine your alignment daily at dawn by rolling a d6 twice. On the first roll, a 1- 2 indicates lawful, 3-4 neutral , and S-6 chaotic. On the second roll, a 1-2 indicates good, 3-4 neutral , and S-6 evil.'),
 (3, 'When you first attune to the artifact, it gives you a quest determined by the DM. You must complete this quest as if affected by the geas spell. Once you complete the quest, you are no longer affected by this property.'),
@@ -391,16 +404,17 @@ INSERT INTO `majornegativproperties` (`id`, `text`) VALUES
 -- Table structure for table `majorproperties`
 --
 
-CREATE TABLE `majorproperties` (
+CREATE TABLE IF NOT EXISTS`majorproperties` (
   `id` int(11) NOT NULL,
-  `text` text
+  `text` text,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `majorproperties`
 --
 
-INSERT INTO `majorproperties` (`id`, `text`) VALUES
+INSERT IGNORE INTO `majorproperties` (`id`, `text`) VALUES
 (1, 'While attuned to the artifact, one of your ability scores (DMs choice) increases by 2, to a maximum of 24.'),
 (2, 'While attuned to the artifact, you regain  ld6 hit points at the start of your turn  if you  have at  least l  hit point. '),
 (3, 'When you hit with a weapon attack while attuned to the artifact, the target takes an extra l d6 damage of the weapons type.'),
@@ -417,16 +431,17 @@ INSERT INTO `majorproperties` (`id`, `text`) VALUES
 -- Table structure for table `minorartefactproperties`
 --
 
-CREATE TABLE `minorartefactproperties` (
+CREATE TABLE IF NOT EXISTS`minorartefactproperties` (
   `id` int(11) NOT NULL,
-  `text` text
+  `text` text,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `minorartefactproperties`
 --
 
-INSERT INTO `minorartefactproperties` (`id`, `text`) VALUES
+INSERT IGNORE INTO `minorartefactproperties` (`id`, `text`) VALUES
 (1, 'While attuned to the artifact, you gain  proficiency in  one skill  of the DMs choice. '),
 (2, 'While attuned to the artifact, you are immune to disease. '),
 (3, 'While attuned to the artifact, you can not  be charmed or frightened .'),
@@ -443,16 +458,17 @@ INSERT INTO `minorartefactproperties` (`id`, `text`) VALUES
 -- Table structure for table `minornegativproperties`
 --
 
-CREATE TABLE `minornegativproperties` (
+CREATE TABLE IF NOT EXISTS`minornegativproperties` (
   `id` int(11) NOT NULL,
-  `text` text
+  `text` text,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `minornegativproperties`
 --
 
-INSERT INTO `minornegativproperties` (`id`, `text`) VALUES
+INSERT IGNORE INTO `minornegativproperties` (`id`, `text`) VALUES
 (1, 'While attuned to the artifact, you  have disadvantage on saving throws against spells. '),
 (2, 'The first time you touch a gem or piece of jewelry while attuned to this artifact, the value of the gem or jewelry is  reduced  by half. '),
 (3, 'While attuned to the artifact, you are blinded when you  are more than 10 feet away from  it. '),
@@ -478,17 +494,18 @@ INSERT INTO `minornegativproperties` (`id`, `text`) VALUES
 -- Table structure for table `minorproperties`
 --
 
-CREATE TABLE `minorproperties` (
+CREATE TABLE IF NOT EXISTS`minorproperties` (
   `id` int(11) NOT NULL,
   `title` varchar(30) DEFAULT NULL,
-  `text` text
+  `text` text,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `minorproperties`
 --
 
-INSERT INTO `minorproperties` (`id`, `title`, `text`) VALUES
+INSERT IGNORE INTO `minorproperties` (`id`, `title`, `text`) VALUES
 (1, 'Absorbing', ' The item has a mirror-like sheen. While equipped, radiant damage taken by the bearer is reduced by 3.'),
 (2, 'Aquatic', ' This item is suited for aquatic use and ignores the restrictions of underwater combat (Player’s Handbook, p. 198). Its weight or bulkiness doesn’t impede swimming.'),
 (3, 'Athletic', 'The item is especially sturdy. It gives the bearer advantage on Strength (Athletics) checks.'),
@@ -545,17 +562,18 @@ INSERT INTO `minorproperties` (`id`, `title`, `text`) VALUES
 -- Table structure for table `purpose`
 --
 
-CREATE TABLE `purpose` (
+CREATE TABLE IF NOT EXISTS`purpose` (
   `id` int(11) NOT NULL,
   `title` varchar(30) NOT NULL,
-  `text` text
+  `text` text,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `purpose`
 --
 
-INSERT INTO `purpose` (`id`, `title`, `text`) VALUES
+INSERT IGNORE INTO `purpose` (`id`, `title`, `text`) VALUES
 (1, 'Aligned', ' The item seeks to defeat or destroy those of a diametrically opposed alignment. (Such  an item  is  never neutral.) '),
 (2, 'Bane', 'The item seeks to defeat or destroy creatures of a particular kind,  such as fiends,  shapechangers, trolls, or wizards. '),
 (3, 'Protector', ' The item seeks to defend a particular race or kind  of creature, such as elves or druids. '),
@@ -573,17 +591,18 @@ INSERT INTO `purpose` (`id`, `title`, `text`) VALUES
 -- Table structure for table `quirks`
 --
 
-CREATE TABLE `quirks` (
+CREATE TABLE IF NOT EXISTS`quirks` (
   `id` int(11) NOT NULL,
   `theme` varchar(30) DEFAULT NULL,
-  `text` text
+  `text` text,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `quirks`
 --
 
-INSERT INTO `quirks` (`id`, `theme`, `text`) VALUES
+INSERT IGNORE INTO `quirks` (`id`, `theme`, `text`) VALUES
 (1, 'Blissful', 'While in possession of the item, the bearer feels fortunate and optimistic about what the future holds. Butterﬂies and other harmless creatures might frolic in the item’s presence'),
 (2, 'Confident', 'The item helps its bearer feel self-assured.'),
 (3, 'Conscientious', ' When the bearer of this item contemplates or undertakes a malevolent act, the item enhances pangs of conscience.'),
@@ -611,18 +630,19 @@ INSERT INTO `quirks` (`id`, `theme`, `text`) VALUES
 -- Table structure for table `rarity`
 --
 
-CREATE TABLE `rarity` (
+CREATE TABLE IF NOT EXISTS`rarity` (
   `id` int(11) NOT NULL,
   `rarity` varchar(30) DEFAULT NULL,
   `maxSpellLevel` int(11) DEFAULT NULL,
-  `maxBonus` int(11) DEFAULT NULL
+  `maxBonus` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `rarity`
 --
 
-INSERT INTO `rarity` (`id`, `rarity`, `maxSpellLevel`, `maxBonus`) VALUES
+INSERT IGNORE INTO `rarity` (`id`, `rarity`, `maxSpellLevel`, `maxBonus`) VALUES
 (1, 'Common', 1, 0),
 (2, 'Uncommon', 3, 1),
 (3, 'Rare', 6, 2),
@@ -635,16 +655,17 @@ INSERT INTO `rarity` (`id`, `rarity`, `maxSpellLevel`, `maxBonus`) VALUES
 -- Table structure for table `senses`
 --
 
-CREATE TABLE `senses` (
+CREATE TABLE IF NOT EXISTS`senses` (
   `id` int(11) NOT NULL,
-  `text` text
+  `text` text,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `senses`
 --
 
-INSERT INTO `senses` (`id`, `text`) VALUES
+INSERT IGNORE INTO `senses` (`id`, `text`) VALUES
 (1, 'Hearing and normal vision out to 30 feet.'),
 (2, 'Hearing and  normal  vision out to 60 feet.'),
 (3, 'Hearing and  normal vi sion out to 120 feet.'),
@@ -656,20 +677,21 @@ INSERT INTO `senses` (`id`, `text`) VALUES
 -- Table structure for table `weapons`
 --
 
-CREATE TABLE `weapons` (
+CREATE TABLE IF NOT EXISTS`weapons` (
   `id` int(11) NOT NULL,
   `weaponName` varchar(30) DEFAULT NULL,
   `damageType` varchar(30) DEFAULT NULL,
   `damageDice` varchar(4) DEFAULT NULL,
   `weaponProperty` text,
-  `Source` varchar(3) NOT NULL
+  `Source` varchar(3) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `weapons`
 --
 
-INSERT INTO `weapons` (`id`, `weaponName`, `damageType`, `damageDice`, `weaponProperty`, `Source`) VALUES
+INSERT IGNORE INTO `weapons` (`id`, `weaponName`, `damageType`, `damageDice`, `weaponProperty`, `Source`) VALUES
 (1, 'Club', 'bludgeoning', '1d4', 'Light', 'PHB'),
 (2, 'Dagger', 'piercing', '1d4', 'Finesse, light, thrown (range 20/60)', 'PHB'),
 (3, 'Greatclub', 'bludgeoning', '1d8', 'Two-handed', 'PHB'),
@@ -735,131 +757,6 @@ INSERT INTO `weapons` (`id`, `weaponName`, `damageType`, `damageDice`, `weaponPr
 (63, 'Dual Naginata', 'slashing', '1d12', 'Heavy, two-handed, pristine', 'HoO'),
 (64, 'Sai', 'piercing', '1d4', 'Finesse, light, special', 'HoO'),
 (65, 'Daikyu', 'piercing', '1d8', 'Ammunition (range 150/600), heavy, two-handed', 'HoO');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `alignment`
---
-ALTER TABLE `alignment`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `armor`
---
-ALTER TABLE `armor`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `comunication`
---
-ALTER TABLE `comunication`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `creator`
---
-ALTER TABLE `creator`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `creaturetype`
---
-ALTER TABLE `creaturetype`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `effect`
---
-ALTER TABLE `effect`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `foe`
---
-ALTER TABLE `foe`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `history`
---
-ALTER TABLE `history`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `itemcategory`
---
-ALTER TABLE `itemcategory`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `itemtype`
---
-ALTER TABLE `itemtype`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_itemcategory` (`FK_itemcategory`);
-
---
--- Indexes for table `majornegativproperties`
---
-ALTER TABLE `majornegativproperties`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `majorproperties`
---
-ALTER TABLE `majorproperties`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `minorartefactproperties`
---
-ALTER TABLE `minorartefactproperties`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `minornegativproperties`
---
-ALTER TABLE `minornegativproperties`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `minorproperties`
---
-ALTER TABLE `minorproperties`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `purpose`
---
-ALTER TABLE `purpose`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `quirks`
---
-ALTER TABLE `quirks`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `rarity`
---
-ALTER TABLE `rarity`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `senses`
---
-ALTER TABLE `senses`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `weapons`
---
-ALTER TABLE `weapons`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -985,16 +882,7 @@ ALTER TABLE `senses`
 ALTER TABLE `weapons`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
---
--- Constraints for dumped tables
---
 
---
--- Constraints for table `itemtype`
---
-ALTER TABLE `itemtype`
-  ADD CONSTRAINT `FK_itemcategory` FOREIGN KEY (`FK_itemcategory`) REFERENCES `itemcategory` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

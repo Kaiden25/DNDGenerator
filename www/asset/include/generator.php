@@ -70,7 +70,7 @@ function generateMagicItem(){
             $postinfo .= $purpose['text']."<br>";
         }
         foreach (getAlignemnt($aligned) as $alignment){
-            $postinfo .= $alignment['alignment']."<br><br>";
+            $postinfo .= $alignment['alignment']."<br>";
         }
     }
     foreach (getCreator() as $creator){
@@ -110,9 +110,9 @@ function generateMagicItem(){
     if (isset($_SESSION['foe'])){
         foreach (getFoe() as $foe) {
             $foe = $foe['foeType'];
-            $mod =$mod+1;
+            $mod2 = $mod + 1;
             $postinfo .= "<br>" . $foe . "<br>";
-            $postinfo .= "This weapon deals additional ". $mod  ."d6 against creatures of the ".$foe. " type.<br>";
+            $postinfo .= "This weapon deals additional ". $mod2  ."d6 against creatures of the ".$foe. " type.<br>";
         }
     }
     if (isset($_POST['weaponType'])){

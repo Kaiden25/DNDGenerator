@@ -8,16 +8,6 @@
  */
 
 session_start();
-//$i = 0;
-//if (isset($_COOKIE['i'])) {
-//    $i++;
-//}
-//
-//if ((isset($_SESSION['sentient']) || isset($_SESSION['artefact']) || isset($_SESSION['foe'])) && $i <= 0){
-//    session_unset();
-//    $i++;
-//    $_COOKIE['i'] = $i;
-//}
 include "asset/include/connectionDatabase.php";
 include "asset/include/generator.php";
 

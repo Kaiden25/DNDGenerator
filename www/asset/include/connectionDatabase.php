@@ -4,7 +4,6 @@
  * User: Drake
  * Date: 19.10.2017
  * Time: 20:55
- * getenv("variablename")
  */
 @session_start();
 GLOBAL $mysqli;
@@ -31,18 +30,12 @@ if (getenv('MYSQL_DATABASE')){
 }
 
 $mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
-//$mysqli = new mysqli('localhost', 'root', '', 'magicitemgenerator');
 if ($mysqli->connect_error) {
     die('Connect Error (' . $mysqli->connect_errno . ') '
         . $mysqli->connect_error);
 }
-//$query = file_get_contents("../../../resources/Database/dndgenerator.sql");
-//$stmt = $db->prepare($query);
-
 $sql = "SET NAMES utf8;";
 $res = $mysqli->query($sql);
-//echo 'Success... ' . $mysqli->host_info . "\n";
-//$mysqli->close();
 
 
 function getItemTypes(){
@@ -372,19 +365,19 @@ function getAlignemnt($aligned){
         $alignmentMaxId = $result->num_rows;
         $alignmentId = mt_rand(1, $alignmentMaxId);
 
-        $sql2 = "SELECT `alignment` FROM `alignment` WHERE `id` LIKE ".$alignmentId.";";
+        $sql2 = "SELECT * FROM `alignment` WHERE `alignment` NOT LIKE '%Neutral';";
         $result = $mysqli->query($sql2);
         while ($row = $result->fetch_assoc()){
             array_push($alignmentInfo, $row);
         }
     } else {
         $alignmentInfo = array();
-        $sql = "SELECT * FROM `alignment` WHERE `alignment` NOT LIKE '%Neutral';";
+        $sql = "SELECT * FROM `alignment`";
         $result = $mysqli->query($sql);
         $alignmentMaxId = $result->num_rows;
         $alignmentId = mt_rand(1, $alignmentMaxId);
 
-        $sql2 = "SELECT `alignment` FROM `alignment` WHERE `id` LIKE ".$alignmentId." AND `alignment` NOT LIKE '%Neutral';";
+        $sql2 = "SELECT `alignment` FROM `alignment` WHERE `id` LIKE ".$alignmentId.";";
         $result = $mysqli->query($sql2);
         while ($row = $result->fetch_assoc()){
             array_push($alignmentInfo, $row);

@@ -42,12 +42,10 @@ SET time_zone = "+00:00";
 -- Table structure for table `alignment`
 --
 CREATE TABLE IF NOT EXISTS `alignment` (
-  `id`        INT(11) NOT NULL,
+  `id` INT(11) NOT NULL,
   `alignment` VARCHAR(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 --
 -- Dumping data for table `alignment`
 --
@@ -66,8 +64,8 @@ INSERT INTO `alignment` (`id`, `alignment`) VALUES
 -- Table structure for table `armor`
 --
 CREATE TABLE IF NOT EXISTS `armor` (
-  `id`                  INT(11)     NOT NULL,
-  `armorName`           VARCHAR(255) DEFAULT NULL,
+  `id` INT(11) NOT NULL,
+  `armorName` VARCHAR(255) DEFAULT NULL,
   `armorclass`          INT(11)      DEFAULT NULL,
   `hasDexMod`           TINYINT(1)  NOT NULL,
   `maxDexMod`           INT(11)      DEFAULT NULL,
@@ -126,8 +124,7 @@ CREATE TABLE IF NOT EXISTS `comunication` (
 INSERT INTO `comunication` (`id`, `text`) VALUES
   (1, 'The item communicates BY transmitting emotion TO the creature carrying OR wielding it.'),
   (2, 'The item can speak, READ, AND understand ONE OR more languages.'),
-  (3, 'The item can speak, READ, AND understand ONE OR more languages.IN addition,
-   the item can communicate telepathically WITH ANY CHARACTER that carries OR wields it.');
+  (3, 'The item can speak, READ, AND understand ONE OR more languages.IN addition, the item can communicate telepathically WITH ANY CHARACTER that carries OR wields it.');
 -- --------------------------------------------------------
 --
 -- Table structure for table `creator`
@@ -144,20 +141,13 @@ CREATE TABLE IF NOT EXISTS `creator` (
 -- Dumping data for table `creator`
 --
 INSERT INTO `creator` (`id`, `creatorType`, `text`) VALUES
-  (1, 'Aberration', 'The item was created BY aberrations IN ancient times,
-   possibly FOR the USE of favored humanoid thralls.WHEN seen FROM the corner of the eye,
-   the item seems TO be moving.'),
+  (1, 'Aberration', 'The item was created BY aberrations IN ancient times, possibly FOR the USE of favored humanoid thralls.WHEN seen FROM the corner of the eye, the item seems TO be moving.'),
   (2, 'Human', 'The item was created during the heyday of a fallen human kingdom, OR it IS tied TO a human of legend.It might hold writing IN a forgotten tongue OR symbols whose significance IS lost TO the ages.'),
   (3, 'Celestial', 'The weapon IS half the normal weight AND inscribed WITH feathered wings, suns, AND other symbols of good.Fiends find the items presence repulsive.'),
   (4, 'Dragon', 'This item IS made FROM scales AND talons shed BY a dragon.Perhaps it  incorporates precious metals AND gems FROM the dragons hoard.It grows slightly warm WHEN within  120 feet of a dragon.'),
   (5, 'Drow', 'The item IS half the normal weight.It IS black AND inscribed WITH spiders AND webs IN honor of Lolth.It might FUNCTION poorly, OR disintegrate, if exposed TO sunlight FOR 1 MINUTE OR more.'),
   (6, 'Dwarf', 'The item IS durable AND has Dwarven runes worked INTO its design.It might be associated WITH a clan that would LIKE TO see it returned TO their ancestral  halls.'),
-  (7, 'Elemental Air', 'The item IS half the normal weight AND feels hollow.IF its made of fabric, it IS
-                                                                                                      diaphanous.The
-                                                                                                      item could have
-                                                                                                           been BY OR
-                                                                                                           FOR a djinnni
-                                                                                                           .'),
+  (7, 'Elemental Air', 'The item IS half the normal weight AND feels hollow.IF its made of fabric, it IS diaphanous. The item could have been BY OR FOR a djinnni .'),
   (8, 'Elemental Earth', 'This item might be crafted FROM stone.ANY cloth OR leather elements are studded WITH finely polished rock.The item could have been BY OR FOR a dao.'),
   (9, 'Elemental Fire', 'This item IS warm TO the touch, AND ANY metal parts are crafted FROM black iron.Sigils of flames cover its surface.Shades of red AND orange are the prominent colors.The item could have been BY OR FOR a efreeti.'),
   (10, 'Elemental Water', 'Lustrous fish scales REPLACE leather OR cloth ON this item, AND metal portions are instead crafted FROM seashells AND worked coral AS hard AS ANY metal.The item could have been BY OR FOR a marid.'),
@@ -172,18 +162,9 @@ INSERT INTO `creator` (`id`, `creatorType`, `text`) VALUES
   (19, 'Hobgoblin', 'The item was created AS tribute FOR a legendary hobgoblin warlord.Its appearance OR markings are distinctive AND likely TO draw the attention of goblinoids.'),
   (20, 'Orc', 'The item was created AS tribute FOR a legendary orc ruler.Its appearance OR markings are distinctive AND likely TO draw the attention of orcs.'),
   (21, 'OUTER Planes', 'The item was made BY OR FOR a traveler of the wild OUTER planes.It IS inscribed WITH sigils of Pandemonium AND Acheron.The bearer IS immune TO the effects of Mad Winds AND Bloodlust.'),
-  (22, 'Undead', 'The item incorporates imagery of death such AS bones AND skulls, AND it might be crafted FROM parts
-                                                                                          of corpses.It feels cold TO
-   the touch.'),
-  (23, 'Yuan - Ti',
-   'The item was crafted LONG ago FOR a fallen yuan-ti empire.It IS serpentine AND sinuous IN design, OR inscribed WITH
-                                                                                                          serpentine
-                                                                                                          markings.Its
-                                                                                                          appearance IS
-                                                                                                          likely TO draw
-   the attention of yuan - ti.'),
-  (24, 'Shadowfell', 'The item was made IN OR FOR the Shadowfell.Its coloration IS muted OR shadowy,
-   mostly black AND gray.The bearer IS immune TO the effects of Shadowfell Despair.');
+  (22, 'Undead', 'The item incorporates imagery of death such AS bones AND skulls, AND it might be crafted FROM parts of corpses.It feels cold TO the touch.'),
+  (23, 'Yuan - Ti', 'The item was crafted LONG ago FOR a fallen yuan-ti empire.It IS serpentine AND sinuous IN design, OR inscribed WITH serpentine markings. Its appearance IS likely TO draw the attention of yuan-ti.'),
+  (24, 'Shadowfell', 'The item was made IN OR FOR the Shadowfell.Its coloration IS muted OR shadowy, mostly black AND gray.The bearer IS immune TO the effects of Shadowfell Despair.');
 -- --------------------------------------------------------
 --
 -- Table structure for table `creaturetype`
@@ -293,13 +274,11 @@ CREATE TABLE IF NOT EXISTS `history` (
 -- Dumping data for table `history`
 --
 INSERT INTO `history` (`id`, `theme`, `text`) VALUES
-  (1, 'Arcane',
-   'This item was created FOR ( OR BY ) an ancient ORDER of spellcasters AND bears the ORDER ’s symbol.'),
+  (1, 'Arcane', 'This item was created FOR ( OR BY ) an ancient ORDER of spellcasters AND bears the ORDER ’s symbol.'),
   (2, 'Bane', 'This item was created BY the foes of a particular culture OR kind of creature.IF the culture OR cultures are still around, they might recognize the item AND single OUT the bearer AS an enemy.'),
   (3, 'Exotic', 'This item IS FROM a distant FOREIGN land, such AS Kara-Tur IN the Forgotten Realms.WHILE the item functions normally, it has an exotic design AND Wuxia NAME (see Dungeon MASTER ’s Guide, p.41)'),
   (4, 'Heroic', ' A great hero once wielded this item.Anyone who’s familiar WITH the item’s history expects great deeds FROM the new OWNER.'),
-  (5, 'Ornament', 'The item was created TO honor a special occasion.Inset gemstones, gold OR platinum
-                                                                                        inlays, AND gold OR silver ﬁligree adorn its surface.'),
+  (5, 'Ornament', 'The item was created TO honor a special occasion.Inset gemstones, gold OR platinum inlays, AND gold OR silver ﬁligree adorn its surface.'),
   (6, 'Prophecy', 'The item features IN a prophecy:its bearer IS destined TO play a KEY role IN future EVENTS.Someone ELSE who wants TO play that role might try TO steal the item, OR someone who wants TO prevent the prophecy FROM being fulﬁlled might try TO KILL the item’s bearer.'),
   (7, 'Religious', 'This item was used IN religious ceremonies dedicated TO a particular deity.It has holy symbols worked INTO it.The god’s followers might try TO persuade its OWNER TO donate it TO a temple, steal the item FOR themselves, OR celebrate its USE BY a cleric OR paladin of the same deity.'),
   (8, 'Sinister', 'This item IS linked TO a deed of great evil, such AS a massacre OR an assassination.It might have a NAME OR be closely associated WITH a villain who used it.Anyone familiar WITH the item’s history IS likely TO treat it AND its OWNER WITH suspicion.'),
@@ -390,10 +369,7 @@ INSERT INTO `majornegativproperties` (`id`, `text`) VALUES
   (2, 'WHILE you are attuned TO the artifact, you determine your alignment daily AT dawn BY rolling a d6 twice.ON the FIRST roll, a 1 - 2 indicates lawful,
    3 - 4 neutral, AND S - 6 chaotic.ON the SECOND roll, a 1 - 2 indicates good, 3 - 4 neutral, AND S - 6 evil.'),
   (3, 'WHEN you FIRST attune TO the artifact, it gives you a quest determined BY the DM.You must complete this quest AS IF affected BY the geas spell.Once you complete the quest, you are NO longer affected BY this property.'),
-  (4, 'The artifact houses a bodiless life FORCE that IS hostile toward you.EACH TIME you USE an ACTION TO USE ONE of the artifacts properties,
-   there IS a 50 percent chance that the life FORCE tries TO LEAVE the artifact AND enter your body.IF you fail a DC 20
-   Charisma saving
-   throw, it succeeds, AND you become an NPC under the DMs control UNTIL the intruding life FORCE IS banished USING magic such AS the dispel evil AND good spell.'),
+  (4, 'The artifact houses a bodiless life FORCE that IS hostile toward you.EACH TIME you USE an ACTION TO USE ONE of the artifacts properties, there IS a 50 percent chance that the life FORCE tries TO LEAVE the artifact AND enter your body.IF you fail a DC 20 Charisma saving throw, it succeeds, AND you become an NPC under the DMs control UNTIL the intruding life FORCE IS banished USING magic such AS the dispel evil AND good spell.'),
   (5, 'Creatures WITH a challenge rating of O, AS well AS plants that are NOT creatures, DROP TO 0 hit points WHEN within 10 feet of the artifact.'),
   (6, 'The artifact imprisons a death slaad (see the Monster Manual).EACH TIME you USE ONE of the artifacts properties AS an ACTION, the slaad has a 10 percent chance of escaping, whereupon it appears within 15 feet of you AND attacks you.'),
   (7, 'WHILE you are attuned TO the artifact, creatures of a particular type other THAN humanoid ( AS chosen BY the DM) are ALWAYS hostile toward you.'),
@@ -593,11 +569,11 @@ INSERT INTO `quirks` (`id`, `theme`, `text`) VALUES
   (6, 'Frail', 'The item crumbles, frays, chips, OR cracks slightly WHEN wielded, worn, OR activated.This quirk has NO effect ON its properties, but IF the item has seen much USE, it looks decrepit.'),
   (7, 'Gallant', 'The item’s bearer become obsessed WITH being polite AND helpful TO the other gender.'),
   (8, 'Generous', 'This item’s bearer feels an urge TO SHARE wealth WITH AND give aid TO the poor OR needy.'),
-  (9, 'Hungry', 'This item’s magical properties FUNCTION only IF fresh blood FROM a humanoid has been applied TO it within the past 24 hours.It needs only a DROP TO activate.'),
+  (9, 'Hungry', 'This item’s magical properties functions only if fresh blood FROM a humanoid has been applied TO it within the past 24 hours.It needs only a DROP TO activate.'),
   (10, 'Loud', 'The item makes a loud noise, such AS a clang, a shout, OR a resonating gong, WHEN used.'),
   (11, 'Metamorphic', 'The item periodically AND randomly alters its appearance IN slight ways.The bearer has NO control over these minor alterations, which have NO effect ON the item’s USE.'),
   (12, 'Mournful', ' WHEN the bearer of this item witnesses death, the item enhances feelings of sorrow AND a desire TO treat the dead WITH respect.'),
-  (13, 'Muttering', 'The item grumbles AND mutters.A creature who listens carefully TO the item might leam something useful.'),
+  (13, 'Muttering', 'The item grumbles AND mutters.A creature who listens carefully TO the item might glean something useful.'),
   (14, 'Painful', 'The bearer experiences a harmless ﬂash of pain WHEN USING the item.'),
   (15, 'Paranoid', 'This item’s bearer becomes suspicious AND feels a sense of being watched OR hunted.'),
   (16, 'Possessive', 'The item demands attunement WHEN ﬁrst wielded OR worn, AND it doesn’t allow its bearer TO attune TO other items.(Other items already attuned TO the bearer remain so UNTIL their attunement ENDS.)'),
@@ -638,10 +614,10 @@ CREATE TABLE IF NOT EXISTS `senses` (
 -- Dumping data for table `senses`
 --
 INSERT INTO `senses` (`id`, `text`) VALUES
-  (1, 'Hearing AND normal vision OUT TO 30 feet.'),
-  (2, 'Hearing AND normal vision OUT TO 60 feet.'),
-  (3, 'Hearing AND normal vision OUT TO 120 feet.'),
-  (4, 'Hearing AND dark vision OUT TO 120 feet.');
+  (1, 'Hearing and normal vision out to 30 feet.'),
+  (2, 'Hearing and normal vision out to 60 feet.'),
+  (3, 'Hearing and normal vision out to 120 feet.'),
+  (4, 'Hearing and dark vision out to 120 feet.');
 -- --------------------------------------------------------
 --
 -- Table structure for table `weapons`
@@ -658,72 +634,73 @@ CREATE TABLE IF NOT EXISTS `weapons` (
 --
 -- Dumping data for table `weapons`
 --
-INSERT INTO `weapons` (`id`, `weaponName`, `damageType`, `damageDice`, `weaponProperty`, `Source`) VALUES
-  (1, 'Club', 'bludgeoning', '1d4', 'Light', 'PHB'),
-  (2, 'Dagger', 'piercing', '1d4', 'Finesse, light, thrown ( RANGE 20/60)', 'PHB'),
-  (3, 'Greatclub', 'bludgeoning', '1d8', 'Two-handed', 'PHB'),
-  (4, 'Handaxe', 'slashing', '1d6', 'Light, thrown ( RANGE 20/60)', 'PHB'),
-  (5, 'Javelin', 'piercing', '1d6', 'Thrown ( RANGE 30/120)', 'PHB'),
-  (6, 'Light Hammer', 'bludgeoning', '1d4', 'Light, thrown ( RANGE 20/60)', 'PHB'),
-  (7, 'Mace', 'bludgeoning', '1d6', '', 'PHB'),
-  (8, 'Quarterstaff', 'bludgeoning', '1d6', 'Versatile (1d8)', 'PHB'),
-  (9, 'Sickle', 'slashing', '1d4', 'Light', 'PHB'),
-  (10, 'Spear', 'slashing', '1d6', 'Thrown ( RANGE 20/60), versatile (ld8)', 'PHB'),
-  (11, 'Light Crossbow', 'piercing', '1d8', 'Ammunition ( RANGE 80/320), loading, two.handed', 'PHB'),
-  (12, 'Dart', 'piercing', '1d4', 'Finesse, thrown ( RANGE 20/60)', 'PHB'),
-  (13, 'Shortbow', 'piercing', '1d6', 'Ammunition ( RANGE 80/320), two.handed', 'PHB'),
-  (14, 'Sling', 'bludgeoning', '1d4', 'Ammunition ( RANGE 30/120)', 'PHB'),
-  (15, 'Battleaxe', 'slashing', '1d8', 'Versatile (ld10)', 'PHB'),
-  (16, 'Flail', 'bludgeoning', '1d8', '', 'PHB'),
-  (17, 'Glaive', 'slashing', '1d10', 'Heavy, reach, two-handed', 'PHB'),
-  (18, 'Greataxe', 'slashing', '1d12', 'Heavy, two-handed', 'PHB'),
-  (19, 'Greatsword', 'slashing', '2d6', 'Heavy, two-handed', 'PHB'),
-  (20, 'Halberd', 'slashing', '1d10', 'Heavy, reach, two.handed', 'PHB'),
-  (21, 'Lance', 'piercing', '1d12', 'Reach, special', 'PHB'),
-  (22, 'Longsword', 'slashing', '1d8', 'Versatile (ldl0)', 'PHB'),
-  (23, 'Maul', 'bludgeoning', '2d6', 'Heavy, two.handed', 'PHB'),
-  (24, 'Morningstar', 'piercing', '1d8', '', 'PHB'),
-  (25, 'Pike', 'piercing', '1d10', 'Heavy, reach, two.handed', 'PHB'),
-  (26, 'Rapier', 'piercing', '1d8', 'Finesse', 'PHB'),
-  (27, 'Scimitar', 'slashing', '1d6', 'Finesse, light', 'PHB'),
-  (28, 'Shortsword', 'piercing', '1d6', 'Finesse, light', 'PHB'),
-  (29, 'Trident', 'piercing', '1d6', 'Thrown ( RANGE 20/60), versatile (ld8)', 'PHB'),
-  (30, 'War Pick', 'piercing', '1d8', '', 'PHB'),
-  (31, 'Warhammer', 'bludgeoning', '1d8', 'Versatile (ld10)', 'PHB'),
-  (32, 'Whip', 'slashing', '1d4', 'Finesse, reach', 'PHB'),
-  (33, 'Blowgun', 'piercing', '1', 'Ammunition ( RANGE 25/100), loading', 'PHB'),
-  (34, 'Hand Crossbow', 'piercing', '1d6', 'Ammunition ( RANGE 30/120), light, loading', 'PHB'),
-  (35, 'Heavy Crossbow', 'piercing', '1d10', 'Ammunition ( RANGE 100/400), heavy, loading, two.handed', 'PHB'),
-  (36, 'Longbow', 'piercing', '1d8', 'Ammunition ( RANGE 150/600), heavy, two-handed', 'PHB'),
-  (37, 'Net', '', '1', 'Special, thrown ( RANGE 5/15)', 'PHB'),
-  (38, 'Tonfa', 'bludgeoning', '1d4', 'Light', 'HoO'),
-  (39, 'Tanto', 'piercing', '1d4', 'Finesse, light, thrown ( RANGE 20/60)', 'HoO'),
-  (40, 'Tetsubo', 'bludgeoning', '1d8', 'Two-handed', 'HoO'),
-  (41, 'Ono', 'slashing', '1d6', 'Light, thrown ( RANGE 20/60), versatile (1d8)', 'HoO'),
-  (42, 'Uchi-ne', 'piercing', '1d6', 'Thrown ( RANGE 30/120)', 'HoO'),
-  (43, 'Kanabo', 'bludgeoning', '1d6', '', 'HoO'),
-  (44, 'Bo', 'bludgeoning', '1d6', 'Versatile (1d8)', 'HoO'),
-  (45, 'Kama', 'slashing', '1d4', 'Light', 'HoO'),
-  (46, 'Yari', 'slashing', '1d6', 'Thrown ( RANGE 20/60), versatile (ld8)', 'HoO'),
-  (47, 'Shuriken', 'piercing', '1d4', 'Finesse, thrown ( RANGE 20/60)', 'HoO'),
-  (48, 'Hankyu', 'piercing', '1d6', 'Ammunition ( RANGE 80/320), two.handed', 'HoO'),
-  (49, 'Masakari', 'slashing', '1d8', 'Versatile (ld10)', 'HoO'),
-  (50, 'Nunchaku', 'bludgeoning', '1d6', '', 'HoO'),
-  (51, 'Naginata', 'slashing', '1d10', 'Heavy, reach, two-handed', 'HoO'),
-  (52, 'Nodachi', 'slashing', '2d6', 'Heavy, two-handed, pristine', 'HoO'),
-  (53, 'Kamayari', 'slashing', '1d10', 'Heavy, reach, two.handed', 'HoO'),
-  (54, 'Umayari', 'piercing', '1d12', 'Reach, special', 'HoO'),
-  (55, 'Katana', 'slashing', '1d8', 'Versatile (ldl0)', 'HoO'),
-  (56, 'Nagaeyari', 'piercing', '1d10', 'Heavy, reach, two.handed', 'HoO'),
-  (57, 'Wakizashi', 'slashing', '1d6', 'Finesse, light, pristine', 'HoO'),
-  (58, 'Ninja- TO ', 'piercing / slashing', '1d6', 'Finesse, light, pristine', 'HoO'),
-  (59, 'Magariyari', 'piercing', '1d6', 'Thrown ( RANGE 20/60), versatile (ld8)', 'HoO'),
-  (60, 'War Fan', 'piercing', '1d6', 'Finesse, light', 'HoO'),
-  (61, 'Kuwa', 'piercing', '1d8', '', 'HoO'),
-  (62, 'Nagamaki', 'slashing', '1d8', 'Versatile (2d4), reach, pristine', 'HoO'),
-  (63, 'Dual Naginata', 'slashing', '1d12', 'Heavy, two-handed, pristine', 'HoO'),
-  (64, 'Sai', 'piercing', '1d4', 'Finesse, light, special', 'HoO'),
-  (65, 'Daikyu', 'piercing', '1d8', 'Ammunition ( RANGE 150/600), heavy, two-handed', 'HoO');
+INSERT INTO `weapons`(`id`, `weaponName`, `damageType`, `damageDice`, `weaponProperty`, `Source`) VALUES
+  (1, 'Club'              , 'bludgeoning'         , '1d4' , 'Light'                                                 , 'PHB'),
+  (2, 'Dagger'            , 'piercing'            , '1d4' , 'Finesse, light, thrown (Range 20/60)'                  , 'PHB'),
+  (3, 'Greatclub'         , 'bludgeoning'         , '1d8' , 'Two-handed'                                            , 'PHB'),
+  (4, 'Handaxe'           , 'slashing'            , '1d6' , 'Light, thrown (Range 20/60)'                           , 'PHB'),
+  (5, 'Javelin'           , 'piercing'            , '1d6' , 'Thrown (Range 30/120)'                                 , 'PHB'),
+  (6, 'Light Hammer'      , 'bludgeoning'         , '1d4' , 'Light, thrown (Range 20/60)'                           , 'PHB'),
+  (7, 'Mace'              , 'bludgeoning'         , '1d6' , ''                                                      , 'PHB'),
+  (8, 'Quarterstaff'      , 'bludgeoning'         , '1d6' , 'Versatile (1d8)'                                       , 'PHB'),
+  (9, 'Sickle'            , 'slashing'            , '1d4' , 'Light'                                                 , 'PHB'),
+  (10, 'Spear'            , 'slashing'            , '1d6' , 'Thrown (Range 20/60), versatile (ld8)'                 , 'PHB'),
+  (11, 'Light Crossbow'   , 'piercing'            , '1d8' , 'Ammunition (Range 80/320), loading, two.handed'        , 'PHB'),
+  (12, 'Dart'             , 'piercing'            , '1d4' , 'Finesse, thrown (Range 20/60)'                         , 'PHB'),
+  (13, 'Shortbow'         , 'piercing'            , '1d6' , 'Ammunition (Range 80/320), two.handed'                 , 'PHB'),
+  (14, 'Sling'            , 'bludgeoning'         , '1d4' , 'Ammunition (Range 30/120)'                             , 'PHB'),
+  (15, 'Battleaxe'        , 'slashing'            , '1d8' , 'Versatile (ld10)'                                      , 'PHB'),
+  (16, 'Flail'            , 'bludgeoning'         , '1d8' , ''                                                      , 'PHB'),
+  (17, 'Glaive'           , 'slashing'            , '1d10', 'Heavy, reach, two-handed'                              , 'PHB'),
+  (18, 'Greataxe'         , 'slashing'            , '1d12', 'Heavy, two-handed'                                     , 'PHB'),
+  (19, 'Greatsword'       , 'slashing'            , '2d6' , 'Heavy, two-handed'                                     , 'PHB'),
+  (20, 'Halberd'          , 'slashing'            , '1d10', 'Heavy, reach, two.handed'                              , 'PHB'),
+  (21, 'Lance'            , 'piercing'            , '1d12', 'Reach, special'                                        , 'PHB'),
+  (22, 'Longsword'        , 'slashing'            , '1d8' , 'Versatile (ldl0)'                                      , 'PHB'),
+  (23, 'Maul'             , 'bludgeoning'         , '2d6' , 'Heavy, two-handed'                                     , 'PHB'),
+  (24, 'Morningstar'      , 'piercing'            , '1d8' , ''                                                      , 'PHB'),
+  (25, 'Pike'             , 'piercing'            , '1d10', 'Heavy, reach, two-handed'                              , 'PHB'),
+  (26, 'Rapier'           , 'piercing'            , '1d8' , 'Finesse'                                               , 'PHB'),
+  (27, 'Scimitar'         , 'slashing'            , '1d6' , 'Finesse, light'                                        , 'PHB'),
+  (28, 'Shortsword'       , 'piercing'            , '1d6' , 'Finesse, light'                                        , 'PHB'),
+  (29, 'Trident'          , 'piercing'            , '1d6' , 'Thrown (Range 20/60), versatile (ld8)'                 , 'PHB'),
+  (30, 'War Pick'         , 'piercing'            , '1d8' , ''                                                      , 'PHB'),
+  (31, 'Warhammer'        , 'bludgeoning'         , '1d8' , 'Versatile (ld10)'                                      , 'PHB'),
+  (32, 'Whip'             , 'slashing'            , '1d4' , 'Finesse, reach'                                        , 'PHB'),
+  (33, 'Blowgun'          , 'piercing'            , '1'   , 'Ammunition (Range 25/100), loading'                    , 'PHB'),
+  (34, 'Hand Crossbow'    , 'piercing'            , '1d6' , 'Ammunition (Range 30/120), light, loading'             , 'PHB'),
+  (35, 'Heavy Crossbow'   , 'piercing'            , '1d10', 'Ammunition (Range 100/400), heavy, loading, two.handed', 'PHB'),
+  (36, 'Longbow'          , 'piercing'            , '1d8' , 'Ammunition (Range 150/600), heavy, two-handed'         , 'PHB'),
+  (37, 'Net'              , ''                    , '1'   , 'Special, thrown (Range 5/15)'                          , 'PHB'),
+  (38, 'Tonfa'            , 'bludgeoning'         , '1d4' , 'Light'                                                 , 'HoO'),
+  (39, 'Tanto'            , 'piercing'            , '1d4' , 'Finesse, light, thrown (Range 20/60)'                  , 'HoO'),
+  (40, 'Tetsubo'          , 'bludgeoning'         , '1d8' , 'Two-handed'                                            , 'HoO'),
+  (41, 'Ono'              , 'slashing'            , '1d6' , 'Light, thrown (Range 20/60), versatile (1d8)'          , 'HoO'),
+  (42, 'Uchi-ne'          , 'piercing'            , '1d6' , 'Thrown (Range 30/120)'                                 , 'HoO'),
+  (43, 'Kanabo'           , 'bludgeoning'         , '1d6' , ''                                                      , 'HoO'),
+  (44, 'Bo'               , 'bludgeoning'         , '1d6' , 'Versatile (1d8)'                                       , 'HoO'),
+  (45, 'Kama'             , 'slashing'            , '1d4' , 'Light'                                                 , 'HoO'),
+  (46, 'Yari'             , 'slashing'            , '1d6' , 'Thrown (Range 20/60), versatile (ld8)'                 , 'HoO'),
+  (47, 'Shuriken'         , 'piercing'            , '1d4' , 'Finesse, thrown (Range 20/60)'                         , 'HoO'),
+  (48, 'Hankyu'           , 'piercing'            , '1d6' , 'Ammunition (Range 80/320), two.handed'                 , 'HoO'),
+  (49, 'Masakari'         , 'slashing'            , '1d8' , 'Versatile (ld10)'                                      , 'HoO'),
+  (50, 'Nunchaku'         , 'bludgeoning'         , '1d6' , ''                                                      , 'HoO'),
+  (51, 'Naginata'         , 'slashing'            , '1d10', 'Heavy, reach, two-handed'                              , 'HoO'),
+  (52, 'Nodachi'          , 'slashing'            , '2d6' , 'Heavy, two-handed, pristine'                           , 'HoO'),
+  (53, 'Kamayari'         , 'slashing'            , '1d10', 'Heavy, reach, two.handed'                              , 'HoO'),
+  (54, 'Umayari'          , 'piercing'            , '1d12', 'Reach, special'                                        , 'HoO'),
+  (55, 'Katana'           , 'slashing'            , '1d8' , 'Versatile (ldl0)'                                      , 'HoO'),
+  (56, 'Nagaeyari'        , 'piercing'            , '1d10', 'Heavy, reach, two.handed'                              , 'HoO'),
+  (57, 'Wakizashi'        , 'slashing'            , '1d6' , 'Finesse, light, pristine'                              , 'HoO'),
+  (58, 'Ninja-To'         , 'piercing / slashing' , '1d6' , 'Finesse, light, pristine'                              , 'HoO'),
+  (59, 'Magariyari'       , 'piercing'            , '1d6' , 'Thrown (Range 20/60), versatile (ld8)'                 , 'HoO'),
+  (60, 'War Fan'          , 'piercing'            , '1d6' , 'Finesse, light'                                        , 'HoO'),
+  (61, 'Kuwa'             , 'piercing'            , '1d8' , ''                                                      , 'HoO'),
+  (62, 'Nagamaki'         , 'slashing'            , '1d8' , 'Versatile (2d4), reach, pristine'                      , 'HoO'),
+  (63, 'Dual Naginata'    , 'slashing'            , '1d12', 'Heavy, two-handed, pristine'                           , 'HoO'),
+  (64, 'Sai'              , 'piercing'            , '1d4' , 'Finesse, light, special'                               , 'HoO'),
+  (65, 'Daikyu'           , 'piercing'            , '1d8' , 'Ammunition (Range 150/600), heavy, two-handed'         , 'HoO');
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;
+COMMIT;

@@ -1,3 +1,23 @@
+DROP TABLE IF EXISTS `alignment`;
+DROP TABLE IF EXISTS `armor`;
+DROP TABLE IF EXISTS `comunication`;
+DROP TABLE IF EXISTS `creator`;
+DROP TABLE IF EXISTS `creaturetype`;
+DROP TABLE IF EXISTS `effect`;
+DROP TABLE IF EXISTS `foe`;
+DROP TABLE IF EXISTS `history`;
+DROP TABLE IF EXISTS `itemcategory`;
+DROP TABLE IF EXISTS `itemtype`;
+DROP TABLE IF EXISTS `majornegativproperties`;
+DROP TABLE IF EXISTS `majorproperties`;
+DROP TABLE IF EXISTS `minorartefactproperties`;
+DROP TABLE IF EXISTS `minornegativproperties`;
+DROP TABLE IF EXISTS `minorproperties`;
+DROP TABLE IF EXISTS `purpose`;
+DROP TABLE IF EXISTS `quirks`;
+DROP TABLE IF EXISTS `rarity`;
+DROP TABLE IF EXISTS `senses`;
+DROP TABLE IF EXISTS `weapons`;
 -- phpMyAdmin SQL Dump
 -- version 4.7.4
 -- https://www.phpmyadmin.net/
@@ -6,38 +26,29 @@
 -- Generation Time: Oct 24, 2017 at 01:48 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
-
 --
 -- Database: `dndgenerator`
 --
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `alignment`
 --
-
 CREATE TABLE IF NOT EXISTS`alignment` (
   `id` int(11) NOT NULL,
   `alignment` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `alignment`
 --
-
 INSERT IGNORE INTO `alignment` (`id`, `alignment`) VALUES
   (1, 'Lawful Good'),
   (2, 'Neutral Good'),
@@ -48,13 +59,10 @@ INSERT IGNORE INTO `alignment` (`id`, `alignment`) VALUES
   (7, 'Lawful Evil'),
   (8, 'Neutral Evil'),
   (9, 'Chaotic Evil');
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `armor`
 --
-
 CREATE TABLE IF NOT EXISTS`armor` (
   `id` int(11) NOT NULL,
   `armorName` varchar(255) DEFAULT NULL,
@@ -69,11 +77,9 @@ CREATE TABLE IF NOT EXISTS`armor` (
   `source` varchar(12) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `armor`
 --
-
 INSERT IGNORE INTO `armor` (`id`, `armorName`, `armorclass`, `hasDexMod`, `maxDexMod`, `strengthRequirment`, `stealthDisadvantage`, `category`, `weight`, `price`, `source`) VALUES
   (1, 'Padded Armor', 11, 1, NULL, NULL, 1, 'light', 8, 5, 'PHB'),
   (2, 'Leather Armor', 11, 1, NULL, NULL, 0, 'light', 10, 10, 'PHB'),
@@ -98,45 +104,35 @@ INSERT IGNORE INTO `armor` (`id`, `armorName`, `armorclass`, `hasDexMod`, `maxDe
   (21, 'Lamellar Armor', 15, 1, 2, NULL, 1, 'medium', 20, 750, 'HoO'),
   (22, 'Great Armor', 18, 0, NULL, 15, 1, 'heavy', 65, 1500, 'HoO'),
   (23, 'Te-date', 2, 0, NULL, NULL, 0, 'shield', 6, 10, 'HoO');
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `comunication`
 --
-
 CREATE TABLE IF NOT EXISTS`comunication` (
   `id` int(11) NOT NULL,
   `text` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `comunication`
 --
-
 INSERT IGNORE INTO `comunication` (`id`, `text`) VALUES
   (1, 'The item communicates by transmitting emotion to the creature carrying or wielding it. '),
   (2, 'The item can speak, read, and understand one or more languages. '),
   (3, 'The item can speak, read, and understand one or more languages. In addition, the item can communicate telepathically with any character that carries or wields it. ');
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `creator`
 --
-
 CREATE TABLE IF NOT EXISTS`creator` (
   `id` int(11) NOT NULL,
   `creatorType` varchar(30) DEFAULT NULL,
   `text` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `creator`
 --
-
 INSERT IGNORE INTO `creator` (`id`, `creatorType`, `text`) VALUES
   (1, 'Aberration', 'The item was created by aberrations in ancient times, possibly for the use of favored humanoid thralls. When seen from  the corner of the eye,  the item seems to be moving. '),
   (2, 'Human', 'The item was created during the heyday of a fallen human kingdom, or it  is tied to a human of legend. It might hold writing in a forgotten tongue or symbols whose significance is lost to the ages.'),
@@ -162,23 +158,18 @@ INSERT IGNORE INTO `creator` (`id`, `creatorType`, `text`) VALUES
   (22, 'Undead', 'The item incorporates imagery of death such as bones and skulls, and it might be crafted from parts of corpses. It feels cold to the touch. '),
   (23, 'Yuan-Ti', 'The item was crafted long ago for a fallen yuan-ti empire. It is serpentine and sinuous in design, or inscribed with serpentine markings. Its appearance is likely to draw the attention of yuan-ti.'),
   (24, 'Shadowfell', 'The item was made in or for the Shadowfell. Its coloration is muted or shadowy, mostly black and gray. The bearer is immune to the effects of Shadowfell Despair.');
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `creaturetype`
 --
-
 CREATE TABLE IF NOT EXISTS`creaturetype` (
   `id` int(11) NOT NULL,
   `creaturetype` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `creaturetype`
 --
-
 INSERT IGNORE INTO `creaturetype` (`id`, `creaturetype`) VALUES
   (1, 'Aberration'),
   (2, 'Beast'),
@@ -199,36 +190,28 @@ INSERT IGNORE INTO `creaturetype` (`id`, `creaturetype`) VALUES
   (17, 'Shapechanger'),
   (18, 'Titan'),
   (19, 'Yugoloth');
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `effect`
 --
-
 CREATE TABLE IF NOT EXISTS`effect` (
   `id` int(11) NOT NULL,
   `effectType` varchar(30) DEFAULT NULL,
   `text` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `foe`
 --
-
 CREATE TABLE IF NOT EXISTS`foe` (
   `id` int(11) NOT NULL,
   `foeType` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `foe`
 --
-
 INSERT IGNORE INTO `foe` (`id`, `foeType`) VALUES
   (1, 'Aberration'),
   (2, 'Beast'),
@@ -262,24 +245,19 @@ INSERT IGNORE INTO `foe` (`id`, `foeType`) VALUES
   (30, 'Shapechanger'),
   (31, 'Titan'),
   (32, 'Yugoloth');
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `history`
 --
-
 CREATE TABLE IF NOT EXISTS`history` (
   `id` int(11) NOT NULL,
   `theme` varchar(30) DEFAULT NULL,
   `text` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `history`
 --
-
 INSERT IGNORE INTO `history` (`id`, `theme`, `text`) VALUES
   (1, 'Arcane', 'This item was created for (or by) an ancient order of spellcasters and bears the order’s symbol.'),
   (2, 'Bane', 'This item was created by the foes of a particular culture or kind of creature. If the culture or cultures are still around, they might recognize the item and single out the bearer as an enemy.'),
@@ -292,23 +270,18 @@ INSERT IGNORE INTO `history` (`id`, `theme`, `text`) VALUES
   (9, 'Symbol of Justice', 'This item was once used by famed protectors, or in a celebrated defense of a people. Anyone familiar with the item’s history might expect the new owner to ﬁght for justice too.'),
   (10, 'Symbol of Power', 'This item was once used as part of royal regalia or as a badge of high ofﬁce. Its former owner or that person’s descendants might desire it, or someone might mistakenly assume its new owner is the item’s legitimate inheritor.'),
   (11, 'Trademark', 'This item was crafted by a renowned maker and bears his or her mark. Possibly it was made for a particular individual or purpose. Anyone familiar with the maker’s mark may question how the new owner came to possess it.');
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `itemcategory`
 --
-
 CREATE TABLE IF NOT EXISTS`itemcategory` (
   `id` int(11) NOT NULL,
   `text` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `itemcategory`
 --
-
 INSERT IGNORE INTO `itemcategory` (`id`, `text`) VALUES
   (1, 'Weapon'),
   (2, 'Armor'),
@@ -319,13 +292,10 @@ INSERT IGNORE INTO `itemcategory` (`id`, `text`) VALUES
   (7, 'Scroll'),
   (8, 'Wondrous Item'),
   (9, 'Tools');
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `itemtype`
 --
-
 CREATE TABLE IF NOT EXISTS`itemtype` (
   `id` int(11) NOT NULL,
   `itemType` varchar(30) DEFAULT NULL,
@@ -333,11 +303,9 @@ CREATE TABLE IF NOT EXISTS`itemtype` (
   PRIMARY KEY (`id`),
   CONSTRAINT `FK_itemcategory` FOREIGN KEY (`FK_itemcategory`) REFERENCES `itemcategory` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `itemtype`CONSTRAINT `FK_itemcategory` FOREIGN KEY (`FK_itemcategory`) REFERENCES `itemcategory` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 --
-
 INSERT IGNORE INTO `itemtype` (`id`, `itemType`, `FK_itemcategory`) VALUES
   (1, 'Light', 2),
   (2, 'Medium', 2),
@@ -359,23 +327,18 @@ INSERT IGNORE INTO `itemtype` (`id`, `itemType`, `FK_itemcategory`) VALUES
   (18, 'General', 5),
   (19, 'General', 6),
   (20, 'General', 7);
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `majornegativproperties`
 --
-
 CREATE TABLE IF NOT EXISTS`majornegativproperties` (
   `id` int(11) NOT NULL,
   `text` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `majornegativproperties`
 --
-
 INSERT IGNORE INTO `majornegativproperties` (`id`, `text`) VALUES
   (1, 'While you are attuned to the artifact, your body rots over the course of four days, after which the rotting stops. You lose your hair by the end of day 1, finger tips and toe tips by the end of day 2, lips and nose by the end of day 3, and ears by the end of day 4. A regenerate spell restores lost body parts '),
   (2, 'While you are attuned to the artifact, you determine your alignment daily at dawn by rolling a d6 twice. On the first roll, a 1- 2 indicates lawful, 3-4 neutral , and S-6 chaotic. On the second roll, a 1-2 indicates good, 3-4 neutral , and S-6 evil.'),
@@ -396,23 +359,18 @@ INSERT IGNORE INTO `majornegativproperties` (`id`, `text`) VALUES
   (17, 'While attuned to the artifact, you lose the ability to speak. '),
   (18, 'While attuned to the artifact, you have vulnerability to all damage. '),
   (19, 'When you become attuned to the artifact, there is a 10 percent chance that you attract the attention of a god that sends an avatar to wrest the artifact from you. The avatar has the same alignment as its creator and the statistics of an empyrean (see the Monster Manual). Once it obtains the artifact, the avatar vanishes.');
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `majorproperties`
 --
-
 CREATE TABLE IF NOT EXISTS`majorproperties` (
   `id` int(11) NOT NULL,
   `text` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `majorproperties`
 --
-
 INSERT IGNORE INTO `majorproperties` (`id`, `text`) VALUES
   (1, 'While attuned to the artifact, one of your ability scores (DMs choice) increases by 2, to a maximum of 24.'),
   (2, 'While attuned to the artifact, you regain ld6 hit points at the start of your turn if you have at least l hit point. '),
@@ -423,23 +381,18 @@ INSERT IGNORE INTO `majorproperties` (`id`, `text`) VALUES
   (7, 'While attuned to the artifact, you can use an action to cast one 6th-level spell (chosen by the DM) from it. After you cast the spell , roll a d6. On a roll of l - 5, you can not cast it again until the next dawn. '),
   (8, 'While attuned to the artifact, you can use an action to cast one 7th-level spell (chosen by the DM) from it. After you cast the spell , roll a d6. On a roll of l - 5, you can not cast it again until the next dawn. '),
   (9, ' While attun ed to the artifa ct, you can not be blinded, deafened, petrified , or stunned. ');
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `minorartefactproperties`
 --
-
 CREATE TABLE IF NOT EXISTS`minorartefactproperties` (
   `id` int(11) NOT NULL,
   `text` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `minorartefactproperties`
 --
-
 INSERT IGNORE INTO `minorartefactproperties` (`id`, `text`) VALUES
   (1, 'While attuned to the artifact, you gain proficiency in one skill of the DMs choice. '),
   (2, 'While attuned to the artifact, you are immune to disease. '),
@@ -450,23 +403,18 @@ INSERT IGNORE INTO `minorartefactproperties` (`id`, `text`) VALUES
   (7, 'While attuned to the artifact, you can use an action to cast one 2nd-level spell (chosen by the DM) from it. After you cast the spell, roll a d6. On a roll of l -5, you can not cast it again until the next dawn.'),
   (8, 'While attuned to the artifact, you can use an action to cast one 3rd-level spell (chosen by the DM) from it. After you cast the spell, roll a d6. On a roll of l -5, you can not cast it again until the next dawn.'),
   (9, 'While attuned to the artifact, you gain a +l bonus to Armor Class. ');
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `minornegativproperties`
 --
-
 CREATE TABLE IF NOT EXISTS`minornegativproperties` (
   `id` int(11) NOT NULL,
   `text` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `minornegativproperties`
 --
-
 INSERT IGNORE INTO `minornegativproperties` (`id`, `text`) VALUES
   (1, 'While attuned to the artifact, you have disadvantage on saving throws against spells. '),
   (2, 'The first time you touch a gem or piece of jewelry while attuned to this artifact, the value of the gem or jewelry is reduced by half. '),
@@ -486,24 +434,19 @@ INSERT IGNORE INTO `minornegativproperties` (`id`, `text`) VALUES
   (16, 'While you are attuned to the artifact, animals within 30 feet of you are hostile toward you . '),
   (17, 'While attuned to the artifact, you must eat and drink six times the normal amount each day. '),
   (18, 'While you are attuned to the artifact, your flaw is amplified in a way determined by the DM.');
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `minorproperties`
 --
-
 CREATE TABLE IF NOT EXISTS`minorproperties` (
   `id` int(11) NOT NULL,
   `title` varchar(30) DEFAULT NULL,
   `text` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `minorproperties`
 --
-
 INSERT IGNORE INTO `minorproperties` (`id`, `title`, `text`) VALUES
   (1, 'Absorbing', 'The item has a mirror-like sheen. While equipped, radiant damage taken by the bearer is reduced by 3.'),
   (2, 'Aquatic', 'This item is suited for aquatic use and ignores the restrictions of underwater combat (Player’s Handbook, p. 198). Its weight or bulkiness doesn’t impede swimming.'),
@@ -554,24 +497,19 @@ INSERT IGNORE INTO `minorproperties` (`id`, `title`, `text`) VALUES
   (47, 'Watchful', 'The item is imbued with alertness. The bearer gains advantage on Dexterity saving throws against traps and is automatically awakened from natural sleep when threatened with harm.'),
   (48, 'Waterborne', 'This item ﬂoats on water and other liquids. Its bearer has advantage on Strength (Athletics) checks to swim.'),
   (49, 'Illusion', 'The item is imbued with illusion magic, allowing its bearer to alter the items’ appearance in minor ways. Such alterations don’t change how the item is worn, carried, or wielded, and they have no effect on its other magical properties. For example, the wearer could make red robe appear blue, or make a gold ring look like it’s made of ivory. The item reverts to its true appearance when no one’s carrying or wearing it.');
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `purpose`
 --
-
 CREATE TABLE IF NOT EXISTS`purpose` (
   `id` int(11) NOT NULL,
   `title` varchar(30) NOT NULL,
   `text` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `purpose`
 --
-
 INSERT IGNORE INTO `purpose` (`id`, `title`, `text`) VALUES
   (1, 'Aligned', 'The item seeks to defeat or destroy those of a diametrically opposed alignment. (Such an item is never neutral.) '),
   (2, 'Bane', 'The item seeks to defeat or destroy creatures of a particular kind, such as fiends, shapechangers, trolls, or wizards. '),
@@ -583,24 +521,19 @@ INSERT IGNORE INTO `purpose` (`id`, `title`, `text`) VALUES
   (8, 'Lore Seeker', 'The item craves knowledge or is determined to solve a mystery, learn a secret, or unravel a cryptic prophecy. '),
   (9, 'Destiny Seeker', 'The item is convinced that it and its wielder have key roles to play in future events. '),
   (10, 'Creator Seeker', 'The item seeks its creator and wants to understand why it was created. ');
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `quirks`
 --
-
 CREATE TABLE IF NOT EXISTS`quirks` (
   `id` int(11) NOT NULL,
   `theme` varchar(30) DEFAULT NULL,
   `text` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `quirks`
 --
-
 INSERT IGNORE INTO `quirks` (`id`, `theme`, `text`) VALUES
   (1, 'Blissful', 'While in possession of the item, the bearer feels fortunate and optimistic about what the future holds. Butterﬂies and other harmless creatures might frolic in the item’s presence'),
   (2, 'Confident', 'The item helps its bearer feel self-assured.'),
@@ -622,13 +555,10 @@ INSERT IGNORE INTO `quirks` (`id`, `theme`, `text`) VALUES
   (18, 'Slothful', 'The bearer of this item feels slothful and lethargic. While attuned to the item, the bearer requires 10 hours to ﬁnish a long rest.'),
   (19, 'Valiant', 'When the bearer of this item is confronted with an opportunity to act in a courageous or heroic way, the item heightens the bearer’s urge to do so.'),
   (20, 'Wicked', 'When the bearer is presented with an opportunity to act in a selﬁsh or malevolent way, the item heightens the bearer’s urge to do so.');
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `rarity`
 --
-
 CREATE TABLE IF NOT EXISTS`rarity` (
   `id` int(11) NOT NULL,
   `rarity` varchar(30) DEFAULT NULL,
@@ -636,46 +566,36 @@ CREATE TABLE IF NOT EXISTS`rarity` (
   `maxBonus` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `rarity`
 --
-
 INSERT IGNORE INTO `rarity` (`id`, `rarity`, `maxSpellLevel`, `maxBonus`) VALUES
   (1, 'Common', 1, 0),
   (2, 'Uncommon', 3, 1),
   (3, 'Rare', 6, 2),
   (4, 'Very Rare', 8, 3),
   (5, 'Legendary', 9, 4);
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `senses`
 --
-
 CREATE TABLE IF NOT EXISTS`senses` (
   `id` int(11) NOT NULL,
   `text` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `senses`
 --
-
 INSERT IGNORE INTO `senses` (`id`, `text`) VALUES
   (1, 'Hearing and normal vision out to 30 feet.'),
   (2, 'Hearing and normal vision out to 60 feet.'),
   (3, 'Hearing and normal vision out to 120 feet.'),
   (4, 'Hearing and dark vision out to 120 feet.');
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `weapons`
 --
-
 CREATE TABLE IF NOT EXISTS`weapons` (
   `id` int(11) NOT NULL,
   `weaponName` varchar(30) DEFAULT NULL,
@@ -685,11 +605,9 @@ CREATE TABLE IF NOT EXISTS`weapons` (
   `Source` varchar(3) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `weapons`
 --
-
 INSERT IGNORE INTO `weapons` (`id`, `weaponName`, `damageType`, `damageDice`, `weaponProperty`, `Source`) VALUES
   (1, 'Club', 'bludgeoning', '1d4', 'Light', 'PHB'),
   (2, 'Dagger', 'piercing', '1d4', 'Finesse, light, thrown (range 20/60)', 'PHB'),
@@ -756,17 +674,14 @@ INSERT IGNORE INTO `weapons` (`id`, `weaponName`, `damageType`, `damageDice`, `w
   (63, 'Dual Naginata', 'slashing', '1d12', 'Heavy, two-handed, pristine', 'HoO'),
   (64, 'Sai', 'piercing', '1d4', 'Finesse, light, special', 'HoO'),
   (65, 'Daikyu', 'piercing', '1d8', 'Ammunition (range 150/600), heavy, two-handed', 'HoO');
-
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
 --
 -- AUTO_INCREMENT for table `alignment`
 --
 ALTER TABLE `alignment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
 --
 -- AUTO_INCREMENT for table `armor`
 --

@@ -219,9 +219,7 @@ CREATE TABLE IF NOT EXISTS `foe` (
   `id`      INT(11) NOT NULL,
   `foeType` VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+)  ENGINE = InnoDB DEFAULT CHARSET = utf8;
 --
 -- Dumping data for table `foe`
 --
@@ -246,9 +244,9 @@ INSERT INTO `foe` (`id`, `foeType`) VALUES
   (18, 'Humanoid (dwarf)'),
   (19, 'Humanoid (dwarf)'),
   (20, 'Humanoid (dwarf)'),
-  (21, 'Aquatic Humanoid (bullywugs, kuo-toa, merfolk, AND sahuagin)'),
-  (22, 'Avian Humanoid (aarakocra AND kenku)'),
-  (23, 'Reptilian humanoids (kobolds, lizardfolk, AND troglodytes)'),
+  (21, 'Aquatic Humanoid (bullywugs, kuo-toa, merfolk, and sahuagin)'),
+  (22, 'Avian Humanoid (aarakocra and kenku)'),
+  (23, 'Reptilian humanoids (kobolds, lizardfolk, and troglodytes)'),
   (24, 'Monstrosity'),
   (25, 'Ooze'),
   (26, 'Plant'),

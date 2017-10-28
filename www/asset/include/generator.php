@@ -8,38 +8,51 @@
 @session_start();
 function itemTypeDropDown()
 {
+    echo '<option value="Random">Random</option>';
     foreach (getItemTypes() as $itemType) {
         echo '<option value="'.$itemType['text'].'">'.$itemType['text'].'</option>';
     }
-    echo '<option value="Random">Random</option>';
 }
-function weaponTypeDropDown()
-{
-    foreach (getWeaponType() as $weapon) {
-        echo '<option value="'.$weapon['weaponName'].'">'.$weapon['weaponName'].'</option>';
-    }
+function equipmentTypeDropDown(){
     echo '<option value="Random">Random</option>';
-}
-function armorTypeDropDown()
-{
-    foreach (getArmorType() as $armor) {
-        echo '<option value="'.$armor['armorName'].'">'.$armor['armorName'].'</option>';
-    }
-    echo '<option value="Random">Random</option>';
-}
-function equipmentTypeDropDown()
-{
     foreach (getWeaponType() as $weapon) {
         echo '<option value="'.$weapon['weaponName'].'">'.$weapon['weaponName'].'</option>';
     }
     foreach (getArmorType() as $armor) {
         echo '<option value="'.$armor['armorName'].'">'.$armor['armorName'].'</option>';
     }
-    echo '<option value="Random">';
 }
+function weaponTypeDropDown(){
+    echo '<option value="Random">Random</option>';
+    foreach (getWeaponType() as $weapon) {
+        echo '<option value="'.$weapon['weaponName'].'">'.$weapon['weaponName'].'</option>';
+    }
+}
+function armorTypeDropDown(){
+    echo '<option value="Random">Random</option>';
+    foreach (getArmorType() as $armor) {
+        echo '<option value="'.$armor['armorName'].'">'.$armor['armorName'].'</option>';
+    }
+}
+function rarityDropDown(){
+    echo '<option value="Random">Random</option>';
+    foreach (getRarityDropDown() as $rarity) {
+        echo '<option value="'.$rarity['rarity'].'">'.$rarity['rarity'].'</option>';
+    }
+}
+function foeDropDown(){
+    echo '<option value="Random">Random</option>';
+    foreach (getFoeDropDown() as $foe) {
+        echo '<option value="'.$foe['foeType'].'">'.$foe['foeType'].'</option>';
+    }
+}
+
 function generateMagicItem(){
     $info = "";
     $attunement = "";
+    if (isset($_POST['attunment'])){
+        $attunement = "Requires Attunemt <br>";
+    }
     $aligned = false;
     $postinfo = "";
     foreach (getRarity() as $rarity){
@@ -108,11 +121,18 @@ function generateMagicItem(){
         $postinfo .= $quirk['text']."<br>";
     }
     if (isset($_SESSION['foe'])){
-        foreach (getFoe() as $foe) {
+        if ($_POST['foeSelector'] !== "Random"){
+            $foe = $_POST['foeSelector'];
+            $info = getFoe($foe);
+        } else {
+            $foe = "Random";
+            $info = getFoe($foe);
+        }
+        foreach ($info as $foe) {
             $foe = $foe['foeType'];
             $mod2 = $mod + 1;
             $postinfo .= "<br>" . $foe . "<br>";
-            $postinfo .= "This weapon deals additional ". $mod2  ."d6 against creatures of the ".$foe. " type.<br>";
+            $postinfo .= "This weapon deals additional ".$mod2."d6 against creatures of the ".$foe." type.<br>";
         }
     }
     if (isset($_POST['weaponType'])){
@@ -125,7 +145,7 @@ function generateMagicItem(){
         }
         foreach ($info as $i){
             if($mod > 0) {
-                $info = "<h3>" . $i['weaponName'] ." + ". $mod . "</h3>";
+                $info = "<h3>".$i['weaponName']." + ".$mod."</h3>";
             } else {
                 $info = "<h3>".$i['weaponName']."</h3>";
             }

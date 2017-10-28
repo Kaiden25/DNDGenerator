@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: Drake
@@ -48,24 +47,33 @@ include "asset/include/generator.php";
                 <form action="index.php" method="POST" id="itemTypeForm">
                 <?php
                 if($_POST['itemType'] === 'Weapon') { ?>
-                What weapon type do you want to create?
-                <select name="weaponType" form="itemTypeForm" required>
-                <?php weaponTypeDropDown(); ?>
-                </select>
-                <?php
+                    What weapon type do you want to create?
+                    <select name="weaponType" form="itemTypeForm" required>
+                    <?php weaponTypeDropDown(); ?>
+                    </select>
+                    <?php
                 } elseif ($_POST['itemType'] === 'Armor'){ ?>
-                What armor type do you want to create?
-                <select name="armorType" form="itemTypeForm" required>
-                <?php armorTypeDropDown(); ?>
-                </select>
-                <?php
+                    What armor type do you want to create?
+                    <select name="armorType" form="itemTypeForm" required>
+                    <?php armorTypeDropDown(); ?>
+                    </select>
+                    <?php
                 } elseif ($_POST['itemType'] === 'Random'){ ?>
-                What equipment type do you want to create?
-                <select name="equipmentType" form="itemTypeForm" required>
-                <?php equipmentTypeDropDown(); ?>
-                </select>
+                    What equipment type do you want to create?
+                    <select name="equipmentType" form="itemTypeForm" required>
+                    <?php equipmentTypeDropDown(); ?>
+                    </select>
+                    <?php
+                } ?>
+                    <br>
+                    <input type="checkbox" name="attunment" value="attunment"> Does the item require attunment? <br>
+                    What rarity does the item have?
+                    <select name="raritySelector" form="itemTypeForm" required>
+                        <?php
+                        rarityDropDown();
+                        ?>
+                    </select><br>
                 <?php
-                }
                 if (isset($_POST['sentient'])){
                     $_SESSION['sentient'] = $_POST['sentient'];
                 }
@@ -73,9 +81,15 @@ include "asset/include/generator.php";
                     $_SESSION['artefact'] = $_POST['artefact'];
                 }
                 if (isset($_POST['foe']) && $_POST['itemType'] !== "Armor"){
-                    $_SESSION['foe'] = $_POST['foe'];
-                }
-                ?>
+                    $_SESSION['foe'] = $_POST['foe']; ?>
+                    What creature type does the enemy of the item have?
+                    <select name="foeSelector" form="itemTypeForm" required>
+                        <?php
+                        foeDropDown();
+                        ?>
+                    </select>
+                <?php
+                } ?>
                 <br>
                 <input type="submit" name="MagicItem" value="Generate the Magic Item">
                 <input type="reset" value="Reset"></form>

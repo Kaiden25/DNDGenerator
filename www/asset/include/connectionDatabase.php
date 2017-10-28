@@ -37,7 +37,6 @@ if ($mysqli->connect_error) {
 $sql = "SET NAMES utf8;";
 $res = $mysqli->query($sql);
 
-
 function getItemTypes(){
     GLOBAL $mysqli;
     $itemTypes = array();
@@ -48,7 +47,6 @@ function getItemTypes(){
     }
     return $itemTypes;
 }
-
 function getEquipmentType(){
     GLOBAL $mysqli;
     $equipmentTypes = array();
@@ -64,7 +62,6 @@ function getEquipmentType(){
     }
     return $equipmentTypes;
 }
-
 function getWeaponType(){
     GLOBAL $mysqli;
     $weaponTypes = array();
@@ -75,7 +72,6 @@ function getWeaponType(){
     }
     return $weaponTypes;
 }
-
 function getArmorType(){
     GLOBAL $mysqli;
     $armorTypes = array();
@@ -86,7 +82,6 @@ function getArmorType(){
     }
     return $armorTypes;
 }
-
 function getWeapon($weapon){
     GLOBAL $mysqli;
     $weaponinfo = array();
@@ -98,8 +93,7 @@ function getWeapon($weapon){
         }
     }else{
         $sql = "SELECT * FROM `weapons`;";
-        $sql = mysqli_query($mysqli, $sql);
-        $result = $sql;
+        $result = $mysqli->query($sql);
         $weaponMaxId = $result->num_rows;
         $weaponId = mt_rand(1, $weaponMaxId);
 
@@ -111,7 +105,6 @@ function getWeapon($weapon){
     }
     return $weaponinfo;
 }
-
 function getArmor($armor){
     GLOBAL $mysqli;
     $armorinfo = array();
@@ -136,7 +129,6 @@ function getArmor($armor){
     }
     return $armorinfo;
 }
-
 function getEquipment($equipment){
     $equipmentinfo = array();
     if ($equipment !== "Random"){
@@ -159,7 +151,6 @@ function getEquipment($equipment){
     }
     return $equipmentinfo;
 }
-
 function getCreator(){
     GLOBAL $mysqli;
     $creatorinfo = array();
@@ -175,7 +166,6 @@ function getCreator(){
     }
     return $creatorinfo;
 }
-
 function getMinorProperty(){
     GLOBAL $mysqli;
     $minorpropertyinfo = array();
@@ -191,7 +181,6 @@ function getMinorProperty(){
     }
     return $minorpropertyinfo;
 }
-
 function getHistory(){
     GLOBAL $mysqli;
     $historyinfo = array();
@@ -207,7 +196,6 @@ function getHistory(){
     }
     return $historyinfo;
 }
-
 function getQuirk(){
     GLOBAL $mysqli;
     $quirkinfo = array();
@@ -223,7 +211,6 @@ function getQuirk(){
     }
     return $quirkinfo;
 }
-
 function getRarity(){
     GLOBAL $mysqli;
     $rarityinfo = array();
@@ -239,7 +226,16 @@ function getRarity(){
     }
     return $rarityinfo;
 }
-
+function getRarityDropDown(){
+    GLOBAL $mysqli;
+    $rarityInfo = array();
+    $sql  = "SELECT `rarity` FROM `rarity`;";
+    $result = $mysqli->query($sql);
+    while ($row = $result->fetch_assoc()){
+        array_push($rarityInfo, $row);
+    }
+    return $rarityInfo;
+}
 function getMajorProperty(){
     GLOBAL $mysqli;
     $majorPropertyInfo = array();
@@ -256,7 +252,6 @@ function getMajorProperty(){
     }
     return $majorPropertyInfo;
 }
-
 function getMajorNegativeProperty(){
     GLOBAL $mysqli;
     $majorNegativePropertyInfo = array();
@@ -273,7 +268,6 @@ function getMajorNegativeProperty(){
     }
     return $majorNegativePropertyInfo;
 }
-
 function getMinorArtefactProperty(){
     GLOBAL $mysqli;
     $minorArtefactPropertyInfo = array();
@@ -290,7 +284,6 @@ function getMinorArtefactProperty(){
     }
     return $minorArtefactPropertyInfo;
 }
-
 function getMinorNegativeProperty(){
     GLOBAL $mysqli;
     $minorNegativePropertyInfo = array();
@@ -307,7 +300,6 @@ function getMinorNegativeProperty(){
     }
     return $minorNegativePropertyInfo;
 }
-
 function getCommunication(){
     GLOBAL $mysqli;
     $communicationInfo = array();
@@ -323,7 +315,6 @@ function getCommunication(){
     }
     return $communicationInfo;
 }
-
 function getSenses(){
     GLOBAL $mysqli;
     $sensesInfo = array();
@@ -339,7 +330,6 @@ function getSenses(){
     }
     return $sensesInfo;
 }
-
 function getPurpose(){
     GLOBAL $mysqli;
     $purposeInfo = array();
@@ -355,7 +345,6 @@ function getPurpose(){
     }
     return $purposeInfo;
 }
-
 function getAlignemnt($aligned){
     GLOBAL $mysqli;
     if ($aligned){
@@ -385,17 +374,34 @@ function getAlignemnt($aligned){
     }
     return $alignmentInfo;
 }
-
-function getFoe(){
+function getFoe($foe){
     GLOBAL $mysqli;
     $foeInfo = array();
-    $sql = "SELECT * FROM `foe`;";
-    $result = $mysqli->query($sql);
-    $foeMaxId = $result->num_rows;
-    $foeId = mt_rand(1, $foeMaxId);
+    if ($foe !== "Random"){
+        $sql1 = "SELECT `foeType` FROM `foe` WHERE `foeType` LIKE '".$foe."';";
+        $result = $mysqli->query($sql1);
+        while ($row = $result->fetch_assoc()) {
+            array_push($foeInfo, $row);
+        }
+    } else {
+        $sql = "SELECT * FROM `foe`;";
+        $result = $mysqli->query($sql);
+        $foeMaxId = $result->num_rows;
+        $foeId = mt_rand(1, $foeMaxId);
 
-    $sql2 = "SELECT `foeType` FROM `foe` WHERE `id` LIKE ".$foeId.";";
-    $result = $mysqli->query($sql2);
+        $sql2 = "SELECT `foeType` FROM `foe` WHERE `id` LIKE ".$foeId.";";
+        $result = $mysqli->query($sql2);
+        while ($row = $result->fetch_assoc()) {
+            array_push($foeInfo, $row);
+        }
+    }
+    return $foeInfo;
+}
+function getFoeDropDown(){
+    GLOBAL $mysqli;
+    $foeInfo = array();
+    $sql  = "SELECT `foeType` FROM `foe`;";
+    $result = $mysqli->query($sql);
     while ($row = $result->fetch_assoc()){
         array_push($foeInfo, $row);
     }

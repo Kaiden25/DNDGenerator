@@ -55,13 +55,22 @@ function generateMagicItem(){
     }
     $aligned = false;
     $postinfo = "";
-    foreach (getRarity() as $rarity){
-        if ($rarity['rarity'] === "Legendary"){
-            $attunement = "Requires Attunemt <br>";
+    if (isset($_POST['raritySelector'])) {
+        if ($_POST['raritySelector'] !== "Random") {
+            $rarity = $_POST['raritySelector'];
+            $info = getRarity($rarity);
+        } else {
+            $rarity = "Random";
+            $info = getRarity($rarity);
         }
-        $rare = $rarity['rarity']."<br>";
-        $mod = $rarity['maxBonus']."<br>";
-        $mod = intval($mod);
+        foreach ($info as $rarity) {
+            if ($rarity['rarity'] === "Legendary") {
+                $attunement = "Requires Attunemt <br>";
+            }
+            $rare = $rarity['rarity'] . "<br>";
+            $mod = $rarity['maxBonus'] . "<br>";
+            $mod = intval($mod);
+        }
     }
     if (isset($_SESSION['sentient'])){
         $postinfo = "<br>";
@@ -214,7 +223,7 @@ function generateMagicItem(){
         } else {
             foreach ($info as $i){
                 if($mod > 0) {
-                    $info = $i['armorName'] . $mod . "<br>";
+                    $info = $i['armorName'] ." + ". $mod . "<br>";
                 } else {
                     $info = $i['armorName'] . "<br>";
                 }

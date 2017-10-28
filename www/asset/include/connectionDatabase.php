@@ -211,20 +211,28 @@ function getQuirk(){
     }
     return $quirkinfo;
 }
-function getRarity(){
+function getRarity($rarity){
     GLOBAL $mysqli;
-    $rarityinfo = array();
-    $sql = "SELECT * FROM `rarity`;";
-    $result = $mysqli->query($sql);
-    $rarityMaxId = $result->num_rows;
-    $rarityId = mt_rand(1, $rarityMaxId);
+    $rarityInfo = array();
+    if ($rarity !== "Random"){
+        $sql1 = "SELECT `rarity`, `maxSpellLevel`, `maxBonus` FROM `rarity` WHERE `rarity` LIKE '".$rarity."';";
+        $result = $mysqli->query($sql1);
+        while ($row = $result->fetch_assoc()) {
+            array_push($rarityInfo, $row);
+        }
+    } else {
+        $sql = "SELECT * FROM `rarity`;";
+        $result = $mysqli->query($sql);
+        $rarityMaxId = $result->num_rows;
+        $rarityId = mt_rand(1, $rarityMaxId);
 
-    $sql2 = "SELECT `rarity`, `maxSpellLevel`, `maxBonus` FROM `rarity` WHERE `id` LIKE ".$rarityId.";";
-    $result = $mysqli->query($sql2);
-    while ($row = $result->fetch_assoc()){
-        array_push($rarityinfo, $row);
+        $sql2 = "SELECT `rarity`, `maxSpellLevel`, `maxBonus` FROM `rarity` WHERE `id` LIKE ".$rarityId.";";
+        $result = $mysqli->query($sql2);
+        while ($row = $result->fetch_assoc()) {
+            array_push($rarityInfo, $row);
+        }
     }
-    return $rarityinfo;
+    return $rarityInfo;
 }
 function getRarityDropDown(){
     GLOBAL $mysqli;

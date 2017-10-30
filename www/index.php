@@ -9,7 +9,10 @@
 session_start();
 include "asset/include/connectionDatabase.php";
 include "asset/include/generator.php";
-
+/*if (!isset($_SESSION['MagicItem']) && $_SESSION['magicItemPost'] == FALSE){
+    header("Location: index.php");
+    $_SESSION['magicItemPost'] = TRUE;
+}*/
 if (!isset($_SESSION['MagicItem'])){
     $_SESSION['creator'] = true;
     $_SESSION['history'] = true;
@@ -29,8 +32,8 @@ if (!isset($_SESSION['MagicItem'])){
 <table align="top">
     <tr>
         <td style="vertical-align:top">
-            <?php if (!isset($_POST['itemPredefine'])) { ?>
-                <form action="index.php" method="POST" id="itemCategoryForm">
+            <?php if (!isset($_GET['itemPredefine'])) { ?>
+                <form action="index.php" method="GET" id="itemCategoryForm">
                     What item type do you want to create?
                     <select name="itemType" form="itemCategoryForm" required>
                         <?php
@@ -49,23 +52,23 @@ if (!isset($_SESSION['MagicItem'])){
                 </form>
                 <?php
             }
-            if (isset($_POST['itemPredefine'])) {
-                $_SESSION['itemType'] = $_POST['itemType']; ?>
-                <form action="index.php" method="POST" id="itemTypeForm">
+            if (isset($_GET['itemPredefine'])) {
+                $_SESSION['itemType'] = $_GET['itemType']; ?>
+                <form action="index.php" method="GET" id="itemTypeForm">
                 <?php
-                if($_POST['itemType'] === 'Weapon') { ?>
+                if($_GET['itemType'] === 'Weapon') { ?>
                     What weapon type do you want to create?
                     <select name="weaponType" form="itemTypeForm" required>
                     <?php weaponTypeDropDown(); ?>
                     </select>
                     <?php
-                } elseif ($_POST['itemType'] === 'Armor'){ ?>
+                } elseif ($_GET['itemType'] === 'Armor'){ ?>
                     What armor type do you want to create?
                     <select name="armorType" form="itemTypeForm" required>
                     <?php armorTypeDropDown(); ?>
                     </select>
                     <?php
-                } elseif ($_POST['itemType'] === 'Random'){ ?>
+                } elseif ($_GET['itemType'] === 'Random'){ ?>
                     What equipment type do you want to create?
                     <select name="equipmentType" form="itemTypeForm" required>
                     <?php equipmentTypeDropDown(); ?>
@@ -81,14 +84,14 @@ if (!isset($_SESSION['MagicItem'])){
                         ?>
                     </select><br>
                 <?php
-                if (isset($_POST['sentient'])){
-                    $_SESSION['sentient'] = $_POST['sentient'];
+                if (isset($_GET['sentient'])){
+                    $_SESSION['sentient'] = $_GET['sentient'];
                 }
-                if (isset($_POST['artefact'])){
-                    $_SESSION['artefact'] = $_POST['artefact'];
+                if (isset($_GET['artefact'])){
+                    $_SESSION['artefact'] = $_GET['artefact'];
                 }
-                if (isset($_POST['foe']) && $_POST['itemType'] !== "Armor"){
-                    $_SESSION['foe'] = $_POST['foe']; ?>
+                if (isset($_GET['foe']) && $_GET['itemType'] !== "Armor"){
+                    $_SESSION['foe'] = $_GET['foe']; ?>
                     What creature type does the enemy of the item have?
                     <select name="foeSelector" form="itemTypeForm" required>
                         <?php
@@ -107,29 +110,30 @@ if (!isset($_SESSION['MagicItem'])){
     <tr>
         <td colspan="2">
             <?php
-            if (isset($_POST['MagicItem'])){
-                $_SESSION['MagicItem'] = $_POST['MagicItem'];
-                if (isset($_POST['raritySelector'])){
-                    $_SESSION['raritySelector'] = $_POST['raritySelector'];
+            if (isset($_GET['MagicItem']) && !isset($_SESSION['MagicItem'])){
+                if (isset($_GET['raritySelector'])){
+                    $_SESSION['raritySelector'] = $_GET['raritySelector'];
                 }
-                if (isset($_POST['foeSelector'])){
-                    $_SESSION['foeSelector'] = $_POST['foeSelector'];
+                if (isset($_GET['foeSelector'])){
+                    $_SESSION['foeSelector'] = $_GET['foeSelector'];
                 }
-                if (isset($_POST['weaponType'])){
-                    $_SESSION['weaponType'] = $_POST['weaponType'];
+                if (isset($_GET['weaponType'])){
+                    $_SESSION['weaponType'] = $_GET['weaponType'];
                 }
-                if (isset($_POST['armorType'])){
-                    $_SESSION['armorType'] = $_POST['armorType'];
+                if (isset($_GET['armorType'])){
+                    $_SESSION['armorType'] = $_GET['armorType'];
                 }
-                if (isset($_POST['equipmentType'])) {
-                    $_SESSION['equipmentType'] = $_POST['equipmentType'];
+                if (isset($_GET['equipmentType'])) {
+                    $_SESSION['equipmentType'] = $_GET['equipmentType'];
                 }
-                if (isset($_POST['attunment'])) {
-                    $_SESSION['attunment'] = $_POST['attunment'];
+                if (isset($_GET['attunment'])) {
+                    $_SESSION['attunment'] = $_GET['attunment'];
                 }
+                $_SESSION['MagicItem'] = generateMagicItem();
                 header("Location: index.php");
+                //$_SESSION['magicItemPost'] = False;
             } elseif (isset($_SESSION['MagicItem'])){
-                echo generateMagicItem();
+                echo $_SESSION['MagicItem'];
                 unsetSession();
             }
             ?>

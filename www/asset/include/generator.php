@@ -260,8 +260,7 @@ function generateMagicItem(){
     return $info;
 }
 
-function unsetSession()
-{
+function unsetSession(){
     if (isset($_SESSION['sentient'])) {
         unset($_SESSION['sentient']);
     }

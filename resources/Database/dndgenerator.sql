@@ -103,7 +103,7 @@ VALUES
   (17, 'Reinforced Shozoku Armor', 13, 1, NULL, NULL, 0, 'light', 2, 3000, 'HoO'),
   (18, 'Dhenuka Armor', 12, 1, 2, NULL, 0, 'medium', 12, 10, 'HoO'),
   (19, 'Brigandine Shirt', 13, 1, 2, NULL, 0, 'medium', 20, 50, 'HoO'),
-  (20, 'PARTIAL Armor', 14, 1, 2, NULL, 0, 'medium', 20, 400, 'HoO'),
+  (20, 'Partial Armor', 14, 1, 2, NULL, 0, 'medium', 20, 400, 'HoO'),
   (21, 'Lamellar Armor', 15, 1, 2, NULL, 1, 'medium', 20, 750, 'HoO'),
   (22, 'Great Armor', 18, 0, NULL, 15, 1, 'heavy', 65, 1500, 'HoO'),
   (23, 'Te-Date', 2, 0, NULL, NULL, 0, 'shield', 6, 10, 'HoO');

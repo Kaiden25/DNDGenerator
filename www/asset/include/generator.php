@@ -232,7 +232,7 @@ function generateMagicItem(){
         } elseif ($_SESSION['equipment'] === "Armor") {
             foreach ($info as $i){
                 if($mod > 0) {
-                    $info = $i['armorName'] ." + ". $mod . "<br>";
+                    $info = "<h3>" . $i['armorName'] ." + ". $mod . "</h3>";
                 } else {
                     $info = $i['armorName'] . "<br>";
                 }

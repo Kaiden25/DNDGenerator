@@ -9,10 +9,10 @@
 session_start();
 include "asset/include/connectionDatabase.php";
 include "asset/include/generator.php";
-/*if (!isset($_SESSION['MagicItem']) && $_SESSION['magicItemPost'] == FALSE){
+if (!isset($_SESSION['MagicItem']) && $_SESSION['magicItemPost'] == FALSE){
     header("Location: index.php");
     $_SESSION['magicItemPost'] = TRUE;
-}*/
+}
 if (!isset($_SESSION['MagicItem'])){
     $_SESSION['creator'] = true;
     $_SESSION['history'] = true;
@@ -130,8 +130,8 @@ if (!isset($_SESSION['MagicItem'])){
                     $_SESSION['attunment'] = $_GET['attunment'];
                 }
                 $_SESSION['MagicItem'] = generateMagicItem();
-                header("Location: index.php");
-                //$_SESSION['magicItemPost'] = False;
+                //header("Location: index.php");
+                $_SESSION['magicItemPost'] = False;
             } elseif (isset($_SESSION['MagicItem'])){
                 echo $_SESSION['MagicItem'];
                 unsetSession();

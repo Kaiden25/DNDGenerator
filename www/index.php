@@ -37,14 +37,13 @@ if (!isset($_SESSION['MagicItem'])){
                         ?>
                     </select>
                     <br>
-                    <input type="checkbox" name="sentient" value="sentient"> Is the item sentient?<br>
+                    <label><input type="checkbox" name="sentient" value="sentient"> Is the item sentient?</label><br>
                     <br>
-                    <input type="checkbox" name="artefact" value="artefact"> Is the item an artefact?<br>
+                    <label><input type="checkbox" name="artefact" value="artefact"> Is the item an artefact?</label><br>
                     <br>
-                    <input type="checkbox" name="foe" value="foe"> Does the item have a foe<br>
+                    <label><input type="checkbox" name="foe" value="foe"> Does the item have a foe?</label><br>
                     <br>
                     <input type="submit" name="itemPredefine" value="Next">
-                    <input type="reset" value="Reset">
                 </form>
                 <?php
             }
@@ -72,7 +71,7 @@ if (!isset($_SESSION['MagicItem'])){
                     <?php
                 } ?>
                     <br>
-                    <input type="checkbox" name="attunment" value="attunment"> Does the item require attunment? <br>
+                    <label><input type="checkbox" name="attunment" value="attunment"> Does the item require attunment?</label><br>
                     What rarity does the item have?
                     <select name="raritySelector" form="itemTypeForm" required>
                         <?php

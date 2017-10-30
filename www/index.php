@@ -7,12 +7,8 @@
  */
 
 session_start();
-include "asset/include/connectionDatabase.php";
-include "asset/include/generator.php";
-if (!isset($_SESSION['MagicItem']) && $_SESSION['magicItemPost'] == FALSE){
-    header("Location: index.php");
-    $_SESSION['magicItemPost'] = TRUE;
-}
+//include_once "asset/include/connectionDatabase.php";
+include_once "asset/include/generator.php";
 if (!isset($_SESSION['MagicItem'])){
     $_SESSION['creator'] = true;
     $_SESSION['history'] = true;
@@ -54,7 +50,7 @@ if (!isset($_SESSION['MagicItem'])){
             }
             if (isset($_GET['itemPredefine'])) {
                 $_SESSION['itemType'] = $_GET['itemType']; ?>
-                <form action="index.php" method="GET" id="itemTypeForm">
+                <form action="asset/include/validation.php" method="GET" id="itemTypeForm">
                 <?php
                 if($_GET['itemType'] === 'Weapon') { ?>
                     What weapon type do you want to create?
@@ -110,31 +106,9 @@ if (!isset($_SESSION['MagicItem'])){
     <tr>
         <td colspan="2">
             <?php
-            if (isset($_GET['MagicItem']) && !isset($_SESSION['MagicItem'])){
-                if (isset($_GET['raritySelector'])){
-                    $_SESSION['raritySelector'] = $_GET['raritySelector'];
-                }
-                if (isset($_GET['foeSelector'])){
-                    $_SESSION['foeSelector'] = $_GET['foeSelector'];
-                }
-                if (isset($_GET['weaponType'])){
-                    $_SESSION['weaponType'] = $_GET['weaponType'];
-                }
-                if (isset($_GET['armorType'])){
-                    $_SESSION['armorType'] = $_GET['armorType'];
-                }
-                if (isset($_GET['equipmentType'])) {
-                    $_SESSION['equipmentType'] = $_GET['equipmentType'];
-                }
-                if (isset($_GET['attunment'])) {
-                    $_SESSION['attunment'] = $_GET['attunment'];
-                }
-                $_SESSION['MagicItem'] = generateMagicItem();
-                //header("Location: index.php");
-                $_SESSION['magicItemPost'] = False;
-            } elseif (isset($_SESSION['MagicItem'])){
+            if (isset($_SESSION['MagicItem'])){
                 echo $_SESSION['MagicItem'];
-                unsetSession();
+                unsetSessionVariables();
             }
             ?>
         </td>

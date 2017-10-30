@@ -6,6 +6,7 @@
  * Time: 19:45
  */
 @session_start();
+include "connectionDatabase.php";
 function itemTypeDropDown()
 {
     echo '<option value="Random">Random</option>';
@@ -256,11 +257,11 @@ function generateMagicItem(){
     }
     $info .= $postinfo;
 
-    unsetSession();
+    unsetSessionVariables();
     return $info;
 }
 
-function unsetSession(){
+function unsetSessionVariables(){
     if (isset($_SESSION['sentient'])) {
         unset($_SESSION['sentient']);
     }

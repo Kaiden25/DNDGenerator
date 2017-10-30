@@ -10,6 +10,13 @@ session_start();
 include "asset/include/connectionDatabase.php";
 include "asset/include/generator.php";
 
+if (!isset($_SESSION['MagicItem'])){
+    $_SESSION['creator'] = true;
+    $_SESSION['history'] = true;
+    $_SESSION['quirk'] = true;
+    $_SESSION['minorProperty'] = true;
+}
+
 ?>
 <html>
 <head>
@@ -101,7 +108,29 @@ include "asset/include/generator.php";
         <td colspan="2">
             <?php
             if (isset($_POST['MagicItem'])){
+                $_SESSION['MagicItem'] = $_POST['MagicItem'];
+                if (isset($_POST['raritySelector'])){
+                    $_SESSION['raritySelector'] = $_POST['raritySelector'];
+                }
+                if (isset($_POST['foeSelector'])){
+                    $_SESSION['foeSelector'] = $_POST['foeSelector'];
+                }
+                if (isset($_POST['weaponType'])){
+                    $_SESSION['weaponType'] = $_POST['weaponType'];
+                }
+                if (isset($_POST['armorType'])){
+                    $_SESSION['armorType'] = $_POST['armorType'];
+                }
+                if (isset($_POST['equipmentType'])) {
+                    $_SESSION['equipmentType'] = $_POST['equipmentType'];
+                }
+                if (isset($_POST['attunment'])) {
+                    $_SESSION['attunment'] = $_POST['attunment'];
+                }
+                header("Location: index.php");
+            } elseif (isset($_SESSION['MagicItem'])){
                 echo generateMagicItem();
+                unsetSession();
             }
             ?>
         </td>

@@ -50,14 +50,14 @@ function foeDropDown(){
 function generateMagicItem(){
     $info = "";
     $attunement = "";
-    if (isset($_POST['attunment'])){
-        $attunement = "Requires Attunemt <br>";
-    }
     $aligned = false;
     $postinfo = "";
-    if (isset($_POST['raritySelector'])) {
-        if ($_POST['raritySelector'] !== "Random") {
-            $rarity = $_POST['raritySelector'];
+    if (isset($_SESSION['attunment'])){
+        $attunement = "Requires Attunemt <br>";
+    }
+    if (isset($_SESSION['raritySelector'])) {
+        if ($_SESSION['raritySelector'] !== "Random") {
+            $rarity = $_SESSION['raritySelector'];
             $info = getRarity($rarity);
         } else {
             $rarity = "Random";
@@ -95,9 +95,11 @@ function generateMagicItem(){
             $postinfo .= $alignment['alignment']."<br>";
         }
     }
-    foreach (getCreator() as $creator){
-        $postinfo .= "<br>".$creator['creatorType']."<br>";
-        $postinfo .= $creator['text']."<br>";
+    if (isset($_SESSION['creator'])){
+        foreach (getCreator() as $creator){
+            $postinfo .= "<br>".$creator['creatorType']."<br>";
+            $postinfo .= $creator['text']."<br>";
+        }
     }
     if (isset($_SESSION['artefact'])){
         foreach (getMajorProperty() as $majorProperty){
@@ -113,25 +115,31 @@ function generateMagicItem(){
             $postinfo .= $majorNegativeProperty['text']."<br>";
         }
     } else {
-        foreach (getMinorProperty() as $minorProperty) {
-            if ($minorProperty['title'] === "Harmonious") {
-                $attunement = "Requires Attunemt <br>";
+        if (isset($_SESSION['minorProperty'])){
+            foreach (getMinorProperty() as $minorProperty) {
+                if ($minorProperty['title'] === "Harmonious") {
+                    $attunement = "Requires Attunemt <br>";
+                }
+                $postinfo .= "<br>" . $minorProperty['title'] . "<br>";
+                $postinfo .= $minorProperty['text'] . "<br>";
             }
-            $postinfo .= "<br>" . $minorProperty['title'] . "<br>";
-            $postinfo .= $minorProperty['text'] . "<br>";
         }
     }
-    foreach (getHistory() as $history){
-        $postinfo .= "<br>".$history['theme']."<br>";
-        $postinfo .= $history['text']."<br>";
+    if (isset($_SESSION['history'])){
+        foreach (getHistory() as $history){
+            $postinfo .= "<br>".$history['theme']."<br>";
+            $postinfo .= $history['text']."<br>";
+        }
     }
-    foreach (getQuirk() as $quirk){
-        $postinfo .= "<br>".$quirk['theme']."<br>";
-        $postinfo .= $quirk['text']."<br>";
+    if (isset($_SESSION['quirk'])){
+        foreach (getQuirk() as $quirk){
+            $postinfo .= "<br>".$quirk['theme']."<br>";
+            $postinfo .= $quirk['text']."<br>";
+        }
     }
     if (isset($_SESSION['foe'])){
-        if ($_POST['foeSelector'] !== "Random"){
-            $foe = $_POST['foeSelector'];
+        if ($_SESSION['foeSelector'] !== "Random"){
+            $foe = $_SESSION['foeSelector'];
             $info = getFoe($foe);
         } else {
             $foe = "Random";
@@ -144,9 +152,9 @@ function generateMagicItem(){
             $postinfo .= "This weapon deals additional ".$mod2."d6 against creatures of the ".$foe." type.<br>";
         }
     }
-    if (isset($_POST['weaponType'])){
-        if ($_POST['weaponType'] !== "Random"){
-            $weapon = $_POST['weaponType'];
+    if (isset($_SESSION['weaponType'])){
+        if ($_SESSION['weaponType'] !== "Random"){
+            $weapon = $_SESSION['weaponType'];
             $info = getWeapon($weapon);
         } else {
             $weapon = "Random";
@@ -159,16 +167,16 @@ function generateMagicItem(){
                 $info = "<h3>".$i['weaponName']."</h3>";
             }
             $info .= $rare;
-            if ($attunement === "Requires Attunemt"){
+            if ($attunement === "Requires Attunemt <br>"){
                 $info .= $attunement;
             }
             $info .= $i['damageType']."<br>";
             $info .= $i['damageDice']."<br>";
             $info .= $i['weaponProperty']."<br>";
         }
-    } elseif (isset($_POST['armorType'])){
-        if ($_POST['armorType'] !== "Random"){
-            $armor = $_POST['armorType'];
+    } elseif (isset($_SESSION['armorType'])){
+        if ($_SESSION['armorType'] !== "Random"){
+            $armor = $_SESSION['armorType'];
             $info = getArmor($armor);
         } else {
             $armor = "Random";
@@ -181,7 +189,7 @@ function generateMagicItem(){
                 $info = "<h3>" .$i['armorName'] . "</h3>";
             }
             $info .= $rare;
-            if ($attunement === "Requires Attunemt"){
+            if ($attunement === "Requires Attunemt <br>"){
                 $info .= $attunement;
             }
             if($mod > 0) {
@@ -197,30 +205,30 @@ function generateMagicItem(){
             }
             $info .= $i['category']."<br>";
         }
-    } elseif (isset($_POST['equipmentType'])) {
-        if ($_POST['equipmentType'] !== "Random") {
-            $equipment = $_POST['equipmentType'];
+    } elseif (isset($_SESSION['equipmentType'])) {
+        if ($_SESSION['equipmentType'] !== "Random") {
+            $equipment = $_SESSION['equipmentType'];
             $info = getEquipment($equipment);
         } else {
             $equipment = "Random";
             $info = getEquipment($equipment);
         }
-        if ($_SESSION['itemType'] === "Weapon"){
+        if ($_SESSION['equipment'] === "Weapon"){
             foreach ($info as $i){
                 if($mod > 0) {
-                    $info = "<h3>" . $i['weaponName'] . $mod . "</h3>";
+                    $info = "<h3>" . $i['weaponName'] ." + ". $mod . "</h3>";
                 } else {
                     $info = "<h3>".$i['weaponName']."</h3>";
                 }
                 $info .= $rare;
-                if ($attunement === "Requires Attunemt"){
+                if ($attunement === "Requires Attunemt <br>"){
                     $info .= $attunement;
                 }
                 $info .= $i['damageType']."<br>";
                 $info .= $i['damageDice']."<br>";
                 $info .= $i['weaponProperty']."<br>";
             }
-        } else {
+        } elseif ($_SESSION['equipment'] === "Armor") {
             foreach ($info as $i){
                 if($mod > 0) {
                     $info = $i['armorName'] ." + ". $mod . "<br>";
@@ -228,12 +236,12 @@ function generateMagicItem(){
                     $info = $i['armorName'] . "<br>";
                 }
                 $info .= $rare;
-                if ($attunement === "Requires Attunemt"){
+                if ($attunement === "Requires Attunemt <br>"){
                     $info .= $attunement;
                 }
                 if($mod > 0) {
                     $ac = $i['armorclass'] + $mod;
-                    $info .= "AC " . $ac . "<br>";
+                    $info .= "AC " ." + ". $ac . "<br>";
                 } else {
                     $info .= $i['armorclass']."<br>";
                 }
@@ -247,14 +255,56 @@ function generateMagicItem(){
         }
     }
     $info .= $postinfo;
-    if (isset($_SESSION['sentient'])){
+
+    unsetSession();
+    return $info;
+}
+
+function unsetSession()
+{
+    if (isset($_SESSION['sentient'])) {
         unset($_SESSION['sentient']);
     }
-    if (isset($_SESSION['artefact'])){
+    if (isset($_SESSION['artefact'])) {
         unset($_SESSION['artefact']);
     }
-    if (isset($_SESSION['foe'])){
+    if (isset($_SESSION['foe'])) {
         unset($_SESSION['foe']);
     }
-    return $info;
+    if (isset($_SESSION['equipment'])) {
+        unset($_SESSION['equipment']);
+    }
+    if (isset($_SESSION['equipmentType'])) {
+        unset($_SESSION['equipmentType']);
+    }
+    if (isset($_SESSION['armorType'])) {
+        unset($_SESSION['armorType']);
+    }
+    if (isset($_SESSION['weaponType'])) {
+        unset($_SESSION['weaponType']);
+    }
+    if (isset($_SESSION['foeSelector'])) {
+        unset($_SESSION['foeSelector']);
+    }
+    if (isset($_SESSION['raritySelector'])) {
+        unset($_SESSION['raritySelector']);
+    }
+    if (isset($_SESSION['attunment'])) {
+        unset($_SESSION['attunment']);
+    }
+    if (isset($_SESSION['creator'])) {
+        unset($_SESSION['creator']);
+    }
+    if (isset($_SESSION['quirk'])) {
+        unset($_SESSION['quirk']);
+    }
+    if (isset($_SESSION['history'])) {
+        unset($_SESSION['history']);
+    }
+    if (isset($_SESSION['minorProperty'])) {
+        unset($_SESSION['minorProperty']);
+    }
+    if (isset($_SESSION['MagicItem'])) {
+        unset($_SESSION['MagicItem']);
+    }
 }

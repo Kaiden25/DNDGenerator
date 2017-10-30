@@ -130,26 +130,30 @@ function getArmor($armor){
     return $armorinfo;
 }
 function getEquipment($equipment){
-    $equipmentinfo = array();
+    $equipmentInfo = array();
     if ($equipment !== "Random"){
         $weapon = $equipment;
         if (getWeapon($weapon)){
-            $equipmentinfo = getWeapon($weapon);
+            $equipmentInfo = getWeapon($weapon);
+            $_SESSION['equipment'] = "Weapon";
         } else {
             $armor = $equipment;
-            $equipmentinfo = getArmor($armor);
+            $equipmentInfo = getArmor($armor);
+            $_SESSION['equipment'] = "Armor";
         }
     } else {
         $selct = mt_rand(0, 1);
         if ($selct == 0){
             $weapon = "Random";
-            $equipmentinfo = getWeapon($weapon);
+            $equipmentInfo = getWeapon($weapon);
+            $_SESSION['equipment'] = "Weapon";
         } else {
             $armor = "Random";
-            $equipmentinfo = getArmor($armor);
+            $equipmentInfo = getArmor($armor);
+            $_SESSION['equipment'] = "Armor";
         }
     }
-    return $equipmentinfo;
+    return $equipmentInfo;
 }
 function getCreator(){
     GLOBAL $mysqli;

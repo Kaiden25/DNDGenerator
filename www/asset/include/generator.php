@@ -47,12 +47,38 @@ function foeDropDown(){
         echo '<option value="'.$foe['foeType'].'">'.$foe['foeType'].'</option>';
     }
 }
+function communicationDropDown(){
+    echo '<option value="Random">Random</option>';
+    foreach (getCommunicationDropDown() as $communication) {
+        echo '<option value="'.$communication['text'].'">'.$communication['text'].'</option>';
+    }
+}
+function purposeDropDown(){
+    echo '<option value="Random">Random</option>';
+    foreach (getPurposeDropDown() as $purpose) {
+        echo '<option value="'.$purpose['title'].'">'.$purpose['title'].'</option>';
+    }
+}
+function sensesDropDown(){
+    echo '<option value="Random">Random</option>';
+    foreach (getSensesDropDown() as $senses) {
+        echo '<option value="'.$senses['text'].'">'.$senses['text'].'</option>';
+    }
+}
+function alignmentDropDown(){
+    echo '<option value="Random">Random</option>';
+    foreach (getAlignemntDropDown() as $alignment) {
+        echo '<option value="'.$alignment['alignment'].'">'.$alignment['alignment'].'</option>';
+    }
+}
 
 function generateMagicItem(){
     $info = "";
     $attunement = "";
     $aligned = false;
     $postinfo = "";
+    $value = "";
+    $selectedAlignment = "";
     if (isset($_SESSION['attunment'])){
         $attunement = "Requires Attunemt <br>";
     }
@@ -74,26 +100,151 @@ function generateMagicItem(){
         }
     }
     if (isset($_SESSION['sentient'])){
-        $postinfo = "<br>";
-        $int = mt_rand(10, 18);
-        $wis = mt_rand(10, 18);
-        $cha = mt_rand(10, 18);
-        $postinfo .= "Attributes<br>Int: ".$int."<br>Wis: ".$wis."<br>Cha: ".$cha."<br>";
-        foreach (getCommunication() as $communication){
-            $postinfo .= $communication['text']."<br>";
-        }
-        foreach (getSenses() as $sense){
-            $postinfo .= $sense['text']."<br>";
-        }
-        foreach (getPurpose() as $purpose){
-            $postinfo .= $purpose['title'] . "<br>";
-            if ($purpose['title'] === "Aligned"){
-                $aligned = true;
+        $postinfo = "<br>Attributes<br>";
+        $random = FALSE;
+        if (isset($_SESSION['randomSentient'])) {
+            $random = TRUE;
+            $value = "Random";
+            $selectedAlignment = "Random";
+            $int = mt_rand(10, 18);
+            $wis = mt_rand(10, 18);
+            $cha = mt_rand(10, 18);
+            $postinfo .= "Intelligence: " . $int . "<br>Wisdom: " . $wis . "<br>Charisma: " . $cha . "<br>";
+            foreach (getCommunication($random, $value) as $communication) {
+                $postinfo .= $communication['text'] . "<br>";
             }
-            $postinfo .= $purpose['text']."<br>";
-        }
-        foreach (getAlignemnt($aligned) as $alignment){
-            $postinfo .= $alignment['alignment']."<br>";
+            foreach (getSenses($random, $value) as $sense) {
+                $postinfo .= $sense['text'] . "<br>";
+            }
+            foreach (getPurpose($random, $value) as $purpose) {
+                $postinfo .= $purpose['title'] . "<br>";
+                if ($purpose['title'] === "Aligned") {
+                    $aligned = true;
+                }
+                $postinfo .= $purpose['text'] . "<br>";
+            }
+            foreach (getAlignemnt($aligned, $selectedAlignment) as $alignment) {
+                $postinfo .= "Alignment: ".$alignment['alignment'] . "<br>";
+            }
+        } elseif (empty($_SESSION['int']) || empty($_SESSION['wis']) || empty($_SESSION['cha']) || empty($_SESSION['communicationSelector']) || empty($_SESSION['senseSelector']) || empty($_SESSION['purposeSelector']) || empty($_SESSION['alignmentSelector'])){
+            if (empty($_SESSION['int'])){
+                $int = mt_rand(10, 18);
+            } else {
+                $int = intval($_SESSION['int']);
+            }
+            if (empty($_SESSION['wis'])){
+                $wis = mt_rand(10, 18);
+            } else {
+                $wis = intval($_SESSION['wis']);
+            }
+            if (empty($_SESSION['cha'])){
+                $cha = mt_rand(10, 18);
+            } else {
+                $cha = intval($_SESSION['cha']);
+
+            }
+            $postinfo .= "Intelligence: " . $int . "<br>Wisdom: " . $wis . "<br>Charisma: " . $cha . "<br>";
+            if (empty($_SESSION['communicationSelector'])){
+                $value = "Random";
+                foreach (getCommunication($random, $value) as $communication) {
+                    $postinfo .= $communication['text'] . "<br>";
+                }
+            } else {
+                $value = $_SESSION['communicationSelector'];
+                foreach (getCommunication($random, $value) as $communication) {
+                    $postinfo .= $communication['text'] . "<br>";
+                }
+            }
+            if (empty($_SESSION['senseSelector'])){
+                $value = "Random";
+                foreach (getSenses($random, $value) as $sense) {
+                    $postinfo .= $sense['text'] . "<br>";
+                }
+            } else {
+                $value = $_SESSION['senseSelector'];
+                foreach (getSenses($random, $value) as $sense) {
+                    $postinfo .= $sense['text'] . "<br>";
+                }
+            }
+            if (empty($_SESSION['purposeSelector'])){
+                $value = "Random";
+                foreach (getPurpose($random, $value) as $purpose) {
+                    $postinfo .= $purpose['title'] . "<br>";
+                    if ($purpose['title'] === "Aligned") {
+                        $aligned = true;
+                    }
+                    $postinfo .= $purpose['text'] . "<br>";
+                }
+            } else {
+                $value = $_SESSION['purposeSelector'];
+                foreach (getPurpose($random, $value) as $purpose) {
+                    $postinfo .= $purpose['title'] . "<br>";
+                    if ($purpose['title'] === "Aligned") {
+                        $aligned = true;
+                    }
+                    $postinfo .= $purpose['text'] . "<br>";
+                }
+            }
+            if (empty($_SESSION['alignmentSelector'])){
+                $selectedAlignment = "Random";
+                foreach (getAlignemnt($aligned, $selectedAlignment) as $alignment) {
+                    $postinfo .= "Alignment: ".$alignment['alignment'] . "<br>";
+                }
+            } else {
+                $selectedAlignment = $_SESSION['alignmentSelector'];
+                if ($aligned){
+                    if(fnmatch("*Neutral", $selectedAlignment)){
+                        $aligned = FALSE;
+                    }
+                }
+                foreach (getAlignemnt($aligned, $selectedAlignment) as $alignment) {
+                    $postinfo .= "Alignment: ".$alignment['alignment'] . "<br>";
+                }
+            }
+        } else {
+            if (isset($_SESSION['int'])){
+                $int = intval($_SESSION['int']);
+            }
+            if (isset($_SESSION['wis'])){
+                $wis = intval($_SESSION['wis']);
+            }
+            if (isset($_SESSION['cha'])){
+                $cha = intval($_SESSION['cha']);
+            }
+            $postinfo .= "Intelligence: " . $int . "<br>Wisdom: " . $wis . "<br>Charisma: " . $cha . "<br>";
+            if (isset($_SESSION['communicationSelector'])) {
+                $value = $_SESSION['communicationSelector'];
+                foreach (getCommunication($random, $value) as $communication) {
+                    $postinfo .= $communication['text'] . "<br>";
+                }
+            }
+            if (isset($_SESSION['senseSelector'])) {
+                $value = $_SESSION['senseSelector'];
+                foreach (getSenses($random, $value) as $sense) {
+                    $postinfo .= $sense['text'] . "<br>";
+                }
+            }
+            if (isset($_SESSION['purposeSelector'])) {
+                $value = $_SESSION['purposeSelector'];
+                foreach (getPurpose($random, $value) as $purpose) {
+                    $postinfo .= $purpose['title'] . "<br>";
+                    if ($purpose['title'] === "Aligned") {
+                        $aligned = true;
+                    }
+                    $postinfo .= $purpose['text'] . "<br>";
+                }
+            }
+            if (isset($_SESSION['alignmentSelector'])) {
+                $selectedAlignment = $_SESSION['alignmentSelector'];
+                if ($aligned){
+                    if(fnmatch("*Neutral", $selectedAlignment)){
+                        $aligned = FALSE;
+                    }
+                }
+                foreach (getAlignemnt($aligned, $selectedAlignment) as $alignment) {
+                        $postinfo .= "Alignment: ".$alignment['alignment'] . "<br>";
+                }
+            }
         }
     }
     if (isset($_SESSION['creator'])){
@@ -306,5 +457,29 @@ function unsetSessionVariables(){
     }
     if (isset($_SESSION['MagicItem'])) {
         unset($_SESSION['MagicItem']);
+    }
+    if (isset($_SESSION['int'])) {
+        unset($_SESSION['int']);
+    }
+    if (isset($_SESSION['wis'])) {
+        unset($_SESSION['wis']);
+    }
+    if (isset($_SESSION['cha'])) {
+        unset($_SESSION['cha']);
+    }
+    if (isset($_SESSION['communicationSelector'])) {
+        unset($_SESSION['communicationSelector']);
+    }
+    if (isset($_SESSION['senseSelector'])) {
+        unset($_SESSION['senseSelector']);
+    }
+    if (isset($_SESSION['purposeSelector'])) {
+        unset($_SESSION['purposeSelector']);
+    }
+    if (isset($_SESSION['alignmentSelector'])) {
+        unset($_SESSION['alignmentSelector']);
+    }
+    if (isset($_SESSION['randomSentient'])) {
+        unset($_SESSION['randomSentient']);
     }
 }

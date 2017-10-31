@@ -172,7 +172,7 @@ function getCreator(){
 }
 function getMinorProperty(){
     GLOBAL $mysqli;
-    $minorpropertyinfo = array();
+    $minorPropertyInfo = array();
     $sql = "SELECT * FROM `minorproperties`;";
     $result = $mysqli->query($sql);
     $minorpropertyMaxId = $result->num_rows;
@@ -181,9 +181,19 @@ function getMinorProperty(){
     $sql2 = "SELECT `title`, `text` FROM `minorproperties` WHERE `id` LIKE ".$minorpropertyId.";";
     $result = $mysqli->query($sql2);
     while ($row = $result->fetch_assoc()){
-        array_push($minorpropertyinfo, $row);
+        array_push($minorPropertyInfo, $row);
     }
-    return $minorpropertyinfo;
+    return $minorPropertyInfo;
+}
+function getMinorPropertyDropDown(){
+    GLOBAL $mysqli;
+    $minorPropertyInfo = array();
+    $sql = "SELECT `text` FROM `minorproperties`;";
+    $result = $mysqli->query($sql);
+    while ($row = $result->fetch_assoc()){
+        array_push($minorPropertyInfo, $row);
+    }
+    return $minorPropertyInfo;
 }
 function getHistory(){
     GLOBAL $mysqli;
@@ -312,67 +322,116 @@ function getMinorNegativeProperty(){
     }
     return $minorNegativePropertyInfo;
 }
-function getCommunication(){
+function getCommunication($random, $value){
     GLOBAL $mysqli;
     $communicationInfo = array();
-    $sql = "SELECT * FROM `comunication`;";
-    $result = $mysqli->query($sql);
-    $communicationMaxId = $result->num_rows;
-    $communicationId = mt_rand(1, $communicationMaxId);
+    if ($random || $value === "Random") {
+        $sql = "SELECT * FROM `comunication`;";
+        $result = $mysqli->query($sql);
+        $communicationMaxId = $result->num_rows;
+        $communicationId = mt_rand(1, $communicationMaxId);
 
-    $sql2 = "SELECT `text` FROM `comunication` WHERE `id` LIKE ".$communicationId.";";
-    $result = $mysqli->query($sql2);
+        $sql2 = "SELECT `text` FROM `comunication` WHERE `id` LIKE " . $communicationId . ";";
+        $result = $mysqli->query($sql2);
+        while ($row = $result->fetch_assoc()) {
+            array_push($communicationInfo, $row);
+        }
+    } elseif(!$random && $value !== "Random") {
+        $sql = "SELECT `text` FROM `comunication` WHERE `text` LIKE '" . $value . "';";
+        $result = $mysqli->query($sql);
+        while ($row = $result->fetch_assoc()) {
+            array_push($communicationInfo, $row);
+        }
+    }
+    return $communicationInfo;
+}
+function getCommunicationDropDown(){
+    GLOBAL $mysqli;
+    $communicationInfo = array();
+    $sql = "SELECT `text` FROM `comunication`;";
+    $result = $mysqli->query($sql);
     while ($row = $result->fetch_assoc()){
         array_push($communicationInfo, $row);
     }
     return $communicationInfo;
 }
-function getSenses(){
+function getSenses($random, $value){
+    GLOBAL $mysqli;
+    if ($random || $value === "Random") {
+        $sensesInfo = array();
+        $sql = "SELECT * FROM `senses`;";
+        $result = $mysqli->query($sql);
+        $sensesMaxId = $result->num_rows;
+        $sensesId = mt_rand(1, $sensesMaxId);
+
+        $sql2 = "SELECT `text` FROM `senses` WHERE `id` LIKE ".$sensesId.";";
+        $result = $mysqli->query($sql2);
+        while ($row = $result->fetch_assoc()){
+            array_push($sensesInfo, $row);
+        }
+    } elseif(!$random && $value !== "Random") {
+        $sql = "SELECT `text` FROM `senses` WHERE `text` LIKE ".$value.";";
+        $result = $mysqli->query($sql);
+        while ($row = $result->fetch_assoc()){
+            array_push($sensesInfo, $row);
+        }
+    }
+    return $sensesInfo;
+}
+function getSensesDropDown(){
     GLOBAL $mysqli;
     $sensesInfo = array();
-    $sql = "SELECT * FROM `senses`;";
+    $sql = "SELECT `text` FROM `senses`;";
     $result = $mysqli->query($sql);
-    $sensesMaxId = $result->num_rows;
-    $sensesId = mt_rand(1, $sensesMaxId);
-
-    $sql2 = "SELECT `text` FROM `senses` WHERE `id` LIKE ".$sensesId.";";
-    $result = $mysqli->query($sql2);
     while ($row = $result->fetch_assoc()){
         array_push($sensesInfo, $row);
     }
     return $sensesInfo;
 }
-function getPurpose(){
+function getPurpose($random, $value){
     GLOBAL $mysqli;
-    $purposeInfo = array();
-    $sql = "SELECT * FROM `purpose`;";
-    $result = $mysqli->query($sql);
-    $purposeMaxId = $result->num_rows;
-    $purposeId = mt_rand(1, $purposeMaxId);
+    if ($random || $value === "Random") {
+        $purposeInfo = array();
+        $sql = "SELECT * FROM `purpose`;";
+        $result = $mysqli->query($sql);
+        $purposeMaxId = $result->num_rows;
+        $purposeId = mt_rand(1, $purposeMaxId);
 
-    $sql2 = "SELECT `title`, `text` FROM `purpose` WHERE `id` LIKE ".$purposeId.";";
-    $result = $mysqli->query($sql2);
-    while ($row = $result->fetch_assoc()){
-        array_push($purposeInfo, $row);
+        $sql2 = "SELECT `title`, `text` FROM `purpose` WHERE `id` LIKE " . $purposeId . ";";
+        $result = $mysqli->query($sql2);
+        while ($row = $result->fetch_assoc()) {
+            array_push($purposeInfo, $row);
+        }
+    } elseif(!$random && $value !== "Random") {
+        echo $value;
+        $sql1 = "SELECT `title`, `text` FROM `purpose` WHERE `title` LIKE '" . $value . "';";
+        $result = $mysqli->query($sql1);
+        while ($row = $result->fetch_assoc()) {
+            array_push($purposeInfo, $row);
+        }
     }
     return $purposeInfo;
 }
-function getAlignemnt($aligned){
+function getPurposeDropDown(){
     GLOBAL $mysqli;
+    $sensesInfo = array();
+    $sql = "SELECT `title` FROM `purpose`;";
+    $result = $mysqli->query($sql);
+    while ($row = $result->fetch_assoc()){
+        array_push($sensesInfo, $row);
+    }
+    return $sensesInfo;
+}
+function getAlignemnt($aligned, $selectedAlignment){
+    GLOBAL $mysqli;
+    $alignmentInfo = array();
     if ($aligned){
-        $alignmentInfo = array();
-        $sql = "SELECT * FROM `alignment`;";
-        $result = $mysqli->query($sql);
-        $alignmentMaxId = $result->num_rows;
-        $alignmentId = mt_rand(1, $alignmentMaxId);
-
         $sql2 = "SELECT * FROM `alignment` WHERE `alignment` NOT LIKE '%Neutral';";
         $result = $mysqli->query($sql2);
         while ($row = $result->fetch_assoc()){
             array_push($alignmentInfo, $row);
         }
-    } else {
-        $alignmentInfo = array();
+    } elseif($selectedAlignment === "Random") {
         $sql = "SELECT * FROM `alignment`";
         $result = $mysqli->query($sql);
         $alignmentMaxId = $result->num_rows;
@@ -383,8 +442,24 @@ function getAlignemnt($aligned){
         while ($row = $result->fetch_assoc()){
             array_push($alignmentInfo, $row);
         }
+    } elseif (!$aligned && $selectedAlignment !== "Random"){
+        $sql1 = "SELECT `alignment` FROM `alignment` WHERE `alignment` LIKE '".$selectedAlignment."';";
+        $result = $mysqli->query($sql1);
+        while ($row = $result->fetch_assoc()){
+            array_push($alignmentInfo, $row);
+        }
     }
     return $alignmentInfo;
+}
+function getAlignemntDropDown(){
+    GLOBAL $mysqli;
+    $foeInfo = array();
+    $sql  = "SELECT `alignment` FROM `alignment`;";
+    $result = $mysqli->query($sql);
+    while ($row = $result->fetch_assoc()){
+        array_push($foeInfo, $row);
+    }
+    return $foeInfo;
 }
 function getFoe($foe){
     GLOBAL $mysqli;

@@ -80,7 +80,37 @@ if (!isset($_SESSION['MagicItem'])){
                     </select><br>
                 <?php
                 if (isset($_GET['sentient'])){
-                    $_SESSION['sentient'] = $_GET['sentient'];
+                    $_SESSION['sentient'] = $_GET['sentient']; ?>
+                    <label><input type="checkbox" name="randomSentient" value="randomSentient"> Do you want the sentient item to be randomly generated?</label><br>
+                    Define the mental attributes of the item (must be numbers from 1 to 20)<br>
+                    Intelligence: <input type="text" name="int" pattern="^[0-9]{1,2}$" max="20" maxlength="2"><br>
+                    Wisdom: <input type="text" name="wis" pattern="^[0-9]{1,2}$" max="20" maxlength="2"><br>
+                    Charisma: <input type="text" name="cha" pattern="^[0-9]{1,2}$" max="20" maxlength="2"><br>
+                    How does the item communicate?
+                    <select name="communicationSelector" form="itemTypeForm" required>
+                        <?php
+                        communicationDropDown();
+                        ?>
+                    </select><br>
+                    How does the item sense its surroundings?
+                    <select name="senseSelector" form="itemTypeForm" required>
+                        <?php
+                        sensesDropDown();
+                        ?>
+                    </select><br>
+                    What is the items purpose?
+                    <select name="purposeSelector" form="itemTypeForm" required>
+                        <?php
+                        purposeDropDown();
+                        ?>
+                    </select><br>
+                    What is the items alignment?
+                    <select name="alignmentSelector" form="itemTypeForm" required>
+                        <?php
+                        alignmentDropDown();
+                        ?>
+                    </select><br>
+                <?php
                 }
                 if (isset($_GET['artefact'])){
                     $_SESSION['artefact'] = $_GET['artefact'];
@@ -97,7 +127,7 @@ if (!isset($_SESSION['MagicItem'])){
                 } ?>
                 <br>
                 <input type="submit" name="MagicItem" value="Generate the Magic Item">
-                <input type="reset" value="Reset"></form>
+                <input type="reset" value="Reset" onclick="window.location='index.php'"></form>
             <?php
             } ?>
         </td>

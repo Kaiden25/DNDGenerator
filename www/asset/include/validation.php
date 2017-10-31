@@ -25,8 +25,33 @@ if (isset($_GET['MagicItem']) && !isset($_SESSION['MagicItem'])){
     if (isset($_GET['attunment'])) {
         $_SESSION['attunment'] = $_GET['attunment'];
     }
+    if (!isset($_GET['randomSentient'])){
+        if (isset($_GET['int'])) {
+            $_SESSION['int'] = $_GET['int'];
+        }
+        if (isset($_GET['wis'])) {
+            $_SESSION['wis'] = $_GET['wis'];
+        }
+        if (isset($_GET['cha'])) {
+            $_SESSION['cha'] = $_GET['cha'];
+        }
+        if (isset($_GET['communicationSelector'])) {
+            $_SESSION['communicationSelector'] = $_GET['communicationSelector'];
+        }
+        if (isset($_GET['senseSelector'])) {
+            $_SESSION['senseSelector'] = $_GET['senseSelector'];
+        }
+        if (isset($_GET['purposeSelector'])) {
+            $_SESSION['purposeSelector'] = $_GET['purposeSelector'];
+        }
+        if (isset($_GET['alignmentSelector'])) {
+            $_SESSION['alignmentSelector'] = $_GET['alignmentSelector'];
+        }
+    }
+    if (isset($_GET['randomSentient'])) {
+        $_SESSION['randomSentient'] = $_GET['randomSentient'];
+    }
     $_SESSION['MagicItem'] = generateMagicItem();
-    //header("Location: index.php");
     $_SESSION['magicItemPost'] = "Redirect";
 }
 if ($_SESSION['magicItemPost'] === "Redirect"){
